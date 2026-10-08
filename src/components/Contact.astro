@@ -432,13 +432,20 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
       if (errorBanner) errorBanner.style.display = 'none';
 
       try {
-        const response = await fetch('/api/contact', {
+        const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
           },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            access_key: 'de785460-a7fb-4b14-91e3-ed4084935163',
+            name: payload.name,
+            email: payload.email,
+            subject: `[Portfolio Contact] ${payload.subject}`,
+            message: payload.message,
+            from_name: 'Aravind Naidu Portfolio',
+          }),
         });
 
         const data = await response.json().catch(() => null);
