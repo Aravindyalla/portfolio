@@ -59,6 +59,7 @@ export async function processChatQuery(message: string) {
   const groqKey = process.env.GROQ_API_KEY;
   if (groqKey) {
     try {
+      const groqModel = process.env.GROQ_MODEL || 'openai/gpt-oss-120b';
       const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -66,7 +67,7 @@ export async function processChatQuery(message: string) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'llama-3.3-70b-versatile',
+          model: groqModel,
           temperature: 0.2,
           max_tokens: 450,
           messages: [
