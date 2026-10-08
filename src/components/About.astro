@@ -1,0 +1,288 @@
+---
+// About.astro
+import { portfolioData } from '../data/portfolio';
+
+const { personal, focusAreas } = portfolioData;
+---
+
+<section class="about-section" id="about">
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header">
+      <div class="section-tag">
+        <span class="dot"></span>
+        <span>About Me</span>
+      </div>
+      <h2 class="section-title">
+        Building Production <span class="text-gradient">AI Systems</span> That Deliver Real Impact
+      </h2>
+      <p class="section-subtitle">
+        Bridging the gap between cutting-edge LLM research and robust, low-latency software engineering.
+      </p>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="about-grid">
+      <!-- Story Narrative Column -->
+      <div class="about-narrative">
+        <div class="narrative-card glass-card">
+          <h3 class="narrative-heading">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Background & Philosophy
+          </h3>
+
+          <p class="narrative-p">
+            I am an <strong>AI Engineer</strong> working at <strong>People Media Factory</strong> in Hyderabad, India, with around 
+            <strong>1 year of professional experience</strong> including my intensive engineering internship.
+          </p>
+
+          <p class="narrative-p">
+            My primary domain is architecting and deploying AI-powered applications that solve demanding operational problems. 
+            I work extensively with <strong>Python, FastAPI, Large Language Models (LLMs), Retrieval-Augmented Generation (RAG)</strong>, 
+            vector embeddings, semantic search algorithms, and scalable vector databases like <strong>Qdrant</strong>.
+          </p>
+
+          <p class="narrative-p">
+            I am particularly driven by the frontiers of <strong>Generative AI, production LLM systems, and Agentic AI</strong>—designing 
+            systems where models don't just generate text, but reliably orchestrate multi-step tasks, ground their reasoning in dynamic enterprise knowledge bases, 
+            and execute with high deterministic precision.
+          </p>
+
+          <!-- Core Attributes Strip -->
+          <div class="attributes-grid">
+            <div class="attribute-box">
+              <span class="attr-icon">📍</span>
+              <div class="attr-text">
+                <span class="attr-label">LOCATION</span>
+                <span class="attr-val">{personal.location}</span>
+              </div>
+            </div>
+            <div class="attribute-box">
+              <span class="attr-icon">🏢</span>
+              <div class="attr-text">
+                <span class="attr-label">ORGANIZATION</span>
+                <span class="attr-val">{personal.company}</span>
+              </div>
+            </div>
+            <div class="attribute-box">
+              <span class="attr-icon">⚡</span>
+              <div class="attr-text">
+                <span class="attr-label">EXPERIENCE</span>
+                <span class="attr-val">1 Year (Full-Time + Intern)</span>
+              </div>
+            </div>
+            <div class="attribute-box">
+              <span class="attr-icon">🎯</span>
+              <div class="attr-text">
+                <span class="attr-label">FOCUS</span>
+                <span class="attr-val">GenAI, LLMs, RAG, Agents</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Pillars of Focus -->
+      <div class="focus-pillars-container">
+        <h3 class="focus-title">Core Engineering Pillars</h3>
+        <div class="pillars-grid">
+          {focusAreas.map((area) => (
+            <div class="pillar-card glass-card">
+              <div class="pillar-top">
+                <div class="pillar-icon-badge">
+                  {area.icon === 'brain' && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04z"></path>
+                      <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04z"></path>
+                    </svg>
+                  )}
+                  {area.icon === 'database' && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                    </svg>
+                  )}
+                  {area.icon === 'server' && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                      <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                      <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                      <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                    </svg>
+                  )}
+                  {area.icon === 'sparkles' && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
+                    </svg>
+                  )}
+                </div>
+                <h4 class="pillar-name">{area.title}</h4>
+              </div>
+
+              <p class="pillar-desc">{area.description}</p>
+
+              <div class="pillar-tags">
+                {area.tags.map((tag) => (
+                  <span class="tech-badge">{tag}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    background: linear-gradient(180deg, transparent 0%, rgba(12, 16, 24, 0.4) 50%, transparent 100%);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  /* Narrative Card */
+  .narrative-card {
+    padding: 32px;
+  }
+  .narrative-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+  }
+  .text-sky {
+    color: var(--sky);
+  }
+  .narrative-p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 18px;
+  }
+  .narrative-p strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* Attributes Grid */
+  .attributes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .attribute-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+  }
+  .attr-icon {
+    font-size: 1.2rem;
+  }
+  .attr-text {
+    display: flex;
+    flex-direction: column;
+  }
+  .attr-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .attr-val {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Focus Pillars */
+  .focus-pillars-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .focus-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .pillar-card {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .pillar-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .pillar-icon-badge {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-md);
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sky);
+    flex-shrink: 0;
+  }
+  .pillar-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .pillar-desc {
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    flex: 1;
+  }
+  .pillar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  @media (max-width: 980px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pillars-grid, .attributes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

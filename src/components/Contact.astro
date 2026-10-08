@@ -1,0 +1,396 @@
+---
+// Contact.astro
+import { portfolioData } from '../data/portfolio';
+
+const { personal } = portfolioData;
+---
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-card glass-card">
+      <!-- Ambient Glow Behind Contact -->
+      <div class="contact-halo" aria-hidden="true"></div>
+
+      <!-- Header Content -->
+      <div class="contact-content">
+        <div class="section-tag">
+          <span class="dot"></span>
+          <span>Get In Touch</span>
+        </div>
+
+        <h2 class="contact-title">
+          Let's Build Intelligent <span class="text-gradient">AI Solutions</span> Together
+        </h2>
+
+        <p class="contact-subtitle">
+          I am actively exploring AI Engineering opportunities focused on Generative AI, LLMs, RAG architectures, 
+          and production Python backends. Whether you have an open role, an AI challenge, or want to discuss LLM systems—let's connect!
+        </p>
+
+        <!-- Availability Indicator Box -->
+        <div class="availability-box">
+          <div class="avail-left">
+            <span class="status-pulse-dot"></span>
+            <div>
+              <span class="avail-status">Available for Engineering Roles</span>
+              <span class="avail-loc">{personal.location} &bull; Open to Remote & On-Site</span>
+            </div>
+          </div>
+          <span class="response-time-pill">&lt; 24h Response Time</span>
+        </div>
+
+        <!-- 4 Primary Buttons Requested -->
+        <div class="contact-buttons-grid">
+          <!-- 1. Download Resume Button -->
+          <a
+            href={personal.resumeUrl}
+            download="Aravind_Naidu_Yalla_Resume.pdf"
+            class="contact-action-btn btn-resume"
+            id="contact-resume-download"
+          >
+            <div class="btn-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+            <div class="btn-text-wrap">
+              <span class="btn-main-label">Download Resume</span>
+              <span class="btn-sub-label">PDF &bull; 1-Page Summary</span>
+            </div>
+            <span class="action-arrow">&darr;</span>
+          </a>
+
+          <!-- 2. LinkedIn Button -->
+          <a
+            href={personal.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-action-btn btn-linkedin"
+            id="contact-linkedin-link"
+          >
+            <div class="btn-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </div>
+            <div class="btn-text-wrap">
+              <span class="btn-main-label">LinkedIn</span>
+              <span class="btn-sub-label">aravind-naidu-yalla</span>
+            </div>
+            <span class="action-arrow">&rarr;</span>
+          </a>
+
+          <!-- 3. GitHub Button -->
+          <a
+            href={personal.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-action-btn btn-github"
+            id="contact-github-link"
+          >
+            <div class="btn-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+            </div>
+            <div class="btn-text-wrap">
+              <span class="btn-main-label">GitHub</span>
+              <span class="btn-sub-label">@Aravindyalla</span>
+            </div>
+            <span class="action-arrow">&rarr;</span>
+          </a>
+
+          <!-- 4. Email Button -->
+          <a
+            href={`mailto:${personal.email}?subject=AI%20Engineering%20Opportunity%20-%20Aravind%20Naidu`}
+            class="contact-action-btn btn-email"
+            id="contact-email-link"
+          >
+            <div class="btn-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div class="btn-text-wrap">
+              <span class="btn-main-label">Send Email</span>
+              <span class="btn-sub-label">{personal.email}</span>
+            </div>
+            <span class="action-arrow">&rarr;</span>
+          </a>
+        </div>
+
+        <!-- 1-Click Copy Strip -->
+        <div class="copy-email-strip">
+          <div class="copy-box">
+            <span class="copy-label">DIRECT EMAIL:</span>
+            <code class="copy-code">{personal.email}</code>
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            data-copy={personal.email}
+            data-copy-msg="Email address copied to clipboard!"
+            id="contact-copy-clipboard-btn"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Copy Email Address</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    position: relative;
+    padding-bottom: 96px;
+  }
+
+  .contact-card {
+    position: relative;
+    padding: 48px;
+    background: rgba(12, 16, 24, 0.9);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .contact-halo {
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.18), rgba(168, 85, 247, 0.15), transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .contact-content {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-title {
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+
+  .contact-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 32px;
+    max-width: 720px;
+  }
+
+  /* Availability Box */
+  .availability-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    margin-bottom: 36px;
+  }
+  .avail-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+  }
+  .status-pulse-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 12px #10b981;
+    animation: pulseGlow 1.8s infinite;
+  }
+  .avail-status {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f1f5f9;
+  }
+  .avail-loc {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+  .response-time-pill {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--sky);
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+  }
+
+  /* 4 Buttons Grid */
+  .contact-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    width: 100%;
+    margin-bottom: 28px;
+  }
+
+  .contact-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    text-align: left;
+  }
+  .contact-action-btn:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
+  }
+
+  .btn-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+  }
+  .btn-text-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .btn-main-label {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .btn-sub-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .action-arrow {
+    font-size: 1.25rem;
+    color: var(--text-dim);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  .contact-action-btn:hover .action-arrow {
+    transform: translateX(4px);
+    color: var(--sky);
+  }
+
+  /* Specific styles */
+  .btn-resume:hover .btn-icon-wrap {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: var(--violet);
+    color: var(--violet);
+  }
+  .btn-linkedin:hover .btn-icon-wrap {
+    background: rgba(10, 102, 194, 0.25);
+    border-color: #0a66c2;
+    color: #38bdf8;
+  }
+  .btn-github:hover .btn-icon-wrap {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: white;
+    color: white;
+  }
+  .btn-email:hover .btn-icon-wrap {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+
+  /* Copy Strip */
+  .copy-email-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    width: 100%;
+    padding: 14px 20px;
+    background: rgba(6, 8, 13, 0.7);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+  }
+  .copy-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .copy-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .copy-code {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--sky);
+    background: rgba(56, 189, 248, 0.08);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+  }
+
+  @media (max-width: 860px) {
+    .contact-card {
+      padding: 32px 20px;
+    }
+    .contact-buttons-grid {
+      grid-template-columns: 1fr;
+    }
+    .availability-box {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

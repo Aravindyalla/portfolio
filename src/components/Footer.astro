@@ -1,0 +1,209 @@
+---
+// Footer.astro
+import { portfolioData } from '../data/portfolio';
+
+const { personal } = portfolioData;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <div class="logo-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <span class="logo-name">{personal.name}</span>
+        </a>
+        <p class="footer-bio">
+          AI Engineer specializing in Generative AI, Large Language Models, RAG systems, and high-performance Python backends.
+        </p>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-links-col">
+          <span class="col-title">NAVIGATION</span>
+          <ul class="col-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills & Arsenal</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <span class="col-title">PROJECTS</span>
+          <ul class="col-links">
+            <li><a href="#project-enterprise-rag-system">Enterprise RAG System</a></li>
+            <li><a href="#project-ai-music-studio">AI Music Studio</a></li>
+            <li><a href="#project-vfx-artist-tracking-system">VFX Artist Tracking System</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <span class="col-title">CONNECT</span>
+          <ul class="col-links">
+            <li><a href={personal.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href={personal.github} target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href={`mailto:${personal.email}`}>Email</a></li>
+            <li><a href={personal.resumeUrl} download="Aravind_Naidu_Yalla_Resume.pdf">Resume (PDF)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">
+        &copy; {currentYear} {personal.name}. Crafted with precision for high-performance AI engineering.
+      </p>
+
+      <div class="footer-meta">
+        <span class="tech-pill">Astro &bull; TypeScript &bull; Vercel Ready</span>
+        <a href="#hero" class="back-to-top-btn" aria-label="Back to top" title="Back to top">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border-subtle);
+    background: rgba(4, 6, 10, 0.95);
+    padding: 64px 0 32px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .footer-brand {
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: var(--sky);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .footer-bio {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .footer-links-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+  }
+  .footer-links-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .col-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+  .col-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .col-links a {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .col-links a:hover {
+    color: var(--sky);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 24px;
+  }
+  .copyright {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  .footer-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .tech-pill {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+  }
+  .back-to-top-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .back-to-top-btn:hover {
+    color: var(--sky);
+    border-color: rgba(56, 189, 248, 0.4);
+    background: rgba(56, 189, 248, 0.1);
+  }
+</style>

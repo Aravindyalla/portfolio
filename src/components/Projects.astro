@@ -1,0 +1,494 @@
+---
+// Projects.astro
+import { portfolioData } from '../data/portfolio';
+
+const { projects, personal } = portfolioData;
+---
+
+<section class="projects-section" id="projects">
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header">
+      <div class="section-tag">
+        <span class="dot"></span>
+        <span>Featured Engineering</span>
+      </div>
+      <h2 class="section-title">
+        Production <span class="text-gradient">AI Systems</span> & Architectures
+      </h2>
+      <p class="section-subtitle">
+        Explore deep-dive technical implementations across enterprise RAG pipelines, generative audio synthesis, and high-performance backend systems.
+      </p>
+    </div>
+
+    <!-- Projects Stack -->
+    <div class="projects-list">
+      {projects.map((project, index) => (
+        <article class="project-showcase glass-card" id={`project-${project.id}`}>
+          <!-- Project Top Meta -->
+          <div class="project-grid">
+            <!-- Visual Media Showcase -->
+            <div class="project-visual-column">
+              <div class="project-image-frame">
+                <div class="image-overlay-glow"></div>
+                <img
+                  src={project.image}
+                  alt={`${project.title} Interface & Architecture`}
+                  class="project-img"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  width="720"
+                  height="405"
+                />
+                <div class="image-status-bar">
+                  <span class="img-badge-live">PRODUCTION ARCHITECTURE</span>
+                  <span class="img-badge-id">0{index + 1} / 0{projects.length}</span>
+                </div>
+              </div>
+
+              <!-- Quick Metrics Grid -->
+              {project.metrics && (
+                <div class="project-metrics-grid">
+                  {project.metrics.map((m) => (
+                    <div class="metric-box">
+                      <span class="metric-val text-gradient">{m.value}</span>
+                      <span class="metric-lbl">{m.label}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <!-- Content Column -->
+            <div class="project-info-column">
+              <div class="project-badge-row">
+                <span class="project-category-badge">{project.badge}</span>
+                <span class="project-id-tag">AI PIPELINE</span>
+              </div>
+
+              <h3 class="project-title">{project.title}</h3>
+              <p class="project-tagline">{project.tagline}</p>
+
+              <p class="project-desc">{project.description}</p>
+
+              <!-- Key Features Checklist -->
+              <div class="project-features-block">
+                <h4 class="features-heading">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-sky">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Core Engineering Capabilities:
+                </h4>
+                <ul class="features-checklist">
+                  {project.features.map((feat) => (
+                    <li class="feature-item">
+                      <span class="check-icon">✓</span>
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Technologies Used -->
+              <div class="project-tech-stack">
+                <span class="tech-stack-title">TECHNOLOGIES:</span>
+                <div class="tech-badges-wrap">
+                  {project.technologies.map((tech) => (
+                    <span class="tech-badge highlight">{tech}</span>
+                  ))}
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="project-action-buttons">
+                {project.architectureSteps && (
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-sm arch-toggle-btn"
+                    data-arch-toggle={`arch-${project.id}`}
+                    aria-expanded="false"
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="7" height="7"></rect>
+                      <rect x="14" y="3" width="7" height="7"></rect>
+                      <rect x="14" y="14" width="7" height="7"></rect>
+                      <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>View Architecture Workflow</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                )}
+
+                <a
+                  href={personal.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-primary btn-sm"
+                  aria-label={`View ${project.title} on GitHub`}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                  </svg>
+                  <span>Repository / Code</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Collapsible Architecture Steps Drawer -->
+          {project.architectureSteps && (
+            <div class="architecture-drawer" id={`arch-${project.id}`} hidden>
+              <div class="arch-inner">
+                <div class="arch-top-bar">
+                  <span class="arch-title">PIPELINE EXECUTION FLOW &mdash; {project.title.toUpperCase()}</span>
+                </div>
+                <div class="arch-steps-grid">
+                  {project.architectureSteps.map((step, sIdx) => (
+                    <div class="arch-step-card">
+                      <div class="arch-step-num">STAGE 0{sIdx + 1}</div>
+                      <div class="arch-step-text">{step}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    position: relative;
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .project-showcase {
+    padding: 32px;
+    background: rgba(10, 14, 22, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+  }
+  .project-showcase:hover {
+    border-color: rgba(56, 189, 248, 0.35);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.08);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+
+  /* Visual Column */
+  .project-visual-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .project-image-frame {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #04060a;
+  }
+  .project-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .project-showcase:hover .project-img {
+    transform: scale(1.02);
+  }
+  .image-overlay-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(4, 6, 10, 0.85) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .image-status-bar {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+  }
+  .img-badge-live {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(8px);
+  }
+  .img-badge-id {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: #cbd5e1;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(8px);
+  }
+
+  /* Metrics Grid */
+  .project-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .metric-box {
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .metric-val {
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    line-height: 1.2;
+  }
+  .metric-lbl {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+  }
+
+  /* Info Column */
+  .project-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .project-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .project-category-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--sky);
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+  }
+  .project-id-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+  .project-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+  .project-tagline {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #38bdf8;
+    line-height: 1.4;
+  }
+  .project-desc {
+    font-size: 0.94rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* Features block */
+  .project-features-block {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+  }
+  .features-heading {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    font-family: var(--font-mono);
+  }
+  .features-checklist {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  .check-icon {
+    color: var(--emerald);
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  /* Tech Stack */
+  .project-tech-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tech-stack-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .tech-badges-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Buttons */
+  .project-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .chevron-icon {
+    transition: transform 0.25s ease;
+  }
+  .arch-toggle-btn.open .chevron-icon {
+    transform: rotate(180deg);
+  }
+
+  /* Collapsible Architecture Drawer */
+  .architecture-drawer {
+    margin-top: 24px;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 20px;
+    animation: fadeIn 0.3s ease;
+  }
+  .architecture-drawer[hidden] {
+    display: none;
+  }
+  .arch-top-bar {
+    margin-bottom: 14px;
+  }
+  .arch-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--sky);
+    letter-spacing: 0.06em;
+  }
+  .arch-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px;
+  }
+  .arch-step-card {
+    padding: 12px 14px;
+    background: rgba(6, 8, 13, 0.6);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: var(--radius-md);
+  }
+  .arch-step-num {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--violet);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .arch-step-text {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 980px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-showcase {
+      padding: 20px;
+    }
+    .project-metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .project-action-buttons {
+      flex-direction: column;
+    }
+    .project-action-buttons .btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  function initProjectDrawers() {
+    const buttons = document.querySelectorAll('[data-arch-toggle]');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-arch-toggle');
+        if (!targetId) return;
+
+        const drawer = document.getElementById(targetId);
+        if (!drawer) return;
+
+        const isHidden = drawer.hasAttribute('hidden');
+        if (isHidden) {
+          drawer.removeAttribute('hidden');
+          btn.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        } else {
+          drawer.setAttribute('hidden', '');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  }
+
+  initProjectDrawers();
+  document.addEventListener('astro:page-load', initProjectDrawers);
+</script>

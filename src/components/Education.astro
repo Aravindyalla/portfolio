@@ -1,0 +1,204 @@
+---
+// Education.astro
+import { portfolioData } from '../data/portfolio';
+
+const { education } = portfolioData;
+---
+
+<section class="education-section" id="education">
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header">
+      <div class="section-tag">
+        <span class="dot"></span>
+        <span>Foundations</span>
+      </div>
+      <h2 class="section-title">
+        Academic <span class="text-gradient">Education</span> & Research
+      </h2>
+      <p class="section-subtitle">
+        Rigorous engineering foundations in computer science, machine learning theory, algorithms, and distributed data systems.
+      </p>
+    </div>
+
+    <!-- Education Cards Grid -->
+    <div class="education-grid">
+      {education.map((edu) => (
+        <div class="education-card glass-card">
+          <div class="edu-top-row">
+            <div class="edu-icon-badge">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+              </svg>
+            </div>
+
+            <div class="edu-title-group">
+              <h3 class="edu-degree">{edu.degree}</h3>
+              <p class="edu-inst">
+                <span>{edu.institution}</span> &bull; <span class="edu-loc">{edu.location}</span>
+              </p>
+            </div>
+
+            <span class="edu-badge">{edu.period}</span>
+          </div>
+
+          <p class="edu-desc">{edu.description}</p>
+
+          <!-- Relevant Coursework -->
+          <div class="edu-coursework-section">
+            <h4 class="coursework-heading">RELEVANT TECHNICAL COURSEWORK:</h4>
+            <div class="coursework-chips">
+              {edu.coursework.map((course) => (
+                <span class="tech-badge highlight">{course}</span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Academic Highlights -->
+          <div class="edu-highlights-section">
+            <h4 class="highlights-heading">CORE ACADEMIC HIGHLIGHTS:</h4>
+            <ul class="edu-highlights-list">
+              {edu.highlights.map((item) => (
+                <li class="edu-hl-item">
+                  <span class="check-mark">&bull;</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .education-section {
+    position: relative;
+  }
+
+  .education-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .education-card {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: rgba(12, 16, 24, 0.85);
+  }
+
+  .edu-top-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .edu-icon-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: var(--violet);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .edu-title-group {
+    flex: 1;
+    min-width: 260px;
+  }
+  .edu-degree {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .edu-inst {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+  }
+  .edu-loc {
+    color: var(--sky);
+    font-family: var(--font-mono);
+  }
+  .edu-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    color: var(--sky);
+  }
+
+  .edu-desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .edu-coursework-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .coursework-heading {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .coursework-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .edu-highlights-section {
+    padding-top: 16px;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .highlights-heading {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+  .edu-highlights-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .edu-hl-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .check-mark {
+    color: var(--violet);
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  @media (max-width: 640px) {
+    .education-card {
+      padding: 20px;
+    }
+  }
+</style>

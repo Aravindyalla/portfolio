@@ -1,0 +1,381 @@
+---
+// Skills.astro
+import { portfolioData } from '../data/portfolio';
+
+const { skillCategories, allSkills } = portfolioData;
+
+const pipelineNodes = [
+  { step: '01', title: 'Data & Ingestion', desc: 'OCR & Text Extraction' },
+  { step: '02', title: 'Embedding Model', desc: 'Hugging Face Transformers' },
+  { step: '03', title: 'Vector Store', desc: 'Qdrant Vector DB' },
+  { step: '04', title: 'API Gateway', desc: 'FastAPI Async Engine' },
+  { step: '05', title: 'Foundation LLM', desc: 'Ollama / Local Inference' },
+  { step: '06', title: 'Grounded Output', desc: 'Contextual Generation' },
+];
+---
+
+<section class="skills-section" id="skills">
+  <div class="container">
+    <!-- Header -->
+    <div class="section-header">
+      <div class="section-tag">
+        <span class="dot"></span>
+        <span>Technical Arsenal</span>
+      </div>
+      <h2 class="section-title">
+        Specialized In Modern <span class="text-gradient">AI & Python</span> Stacks
+      </h2>
+      <p class="section-subtitle">
+        Hands-on production proficiency across foundation models, vector stores, embeddings, and low-latency API architectures.
+      </p>
+    </div>
+
+    <!-- AI Architecture Pipeline Flow -->
+    <div class="pipeline-card glass-card">
+      <div class="pipeline-header">
+        <div class="pipeline-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          END-TO-END PRODUCTION PIPELINE ARCHITECTURE
+        </div>
+        <span class="pipeline-status">Deterministic &bull; Grounded &bull; Scalable</span>
+      </div>
+
+      <div class="pipeline-nodes">
+        {pipelineNodes.map((node, index) => (
+          <div class="node-wrapper">
+            <div class="pipeline-node">
+              <span class="node-step">{node.step}</span>
+              <span class="node-title">{node.title}</span>
+              <span class="node-desc">{node.desc}</span>
+            </div>
+            {index < pipelineNodes.length - 1 && (
+              <div class="node-arrow" aria-hidden="true">&rarr;</div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Interactive Category Filter Tabs -->
+    <div class="skills-tabs" role="tablist" aria-label="Skills Filter">
+      <button class="skill-tab active" data-filter="all" role="tab" aria-selected="true">
+        All Skills ({allSkills.length})
+      </button>
+      {skillCategories.map((cat, idx) => (
+        <button class="skill-tab" data-filter={`cat-${idx}`} role="tab" aria-selected="false">
+          {cat.title}
+        </button>
+      ))}
+    </div>
+
+    <!-- Skills Category Cards Grid -->
+    <div class="categories-grid">
+      {skillCategories.map((cat, idx) => (
+        <div class="category-card glass-card" data-category={`cat-${idx}`}>
+          <div class="cat-top">
+            <div class="cat-title-block">
+              <h3 class="cat-title">{cat.title}</h3>
+              <p class="cat-desc">{cat.description}</p>
+            </div>
+            <span class="cat-count">{cat.skills.length} skills</span>
+          </div>
+
+          <div class="skills-pills-list">
+            {cat.skills.map((skill) => (
+              <div class="skill-pill">
+                <div class="skill-pill-main">
+                  <span class="skill-name">{skill.name}</span>
+                  <span class="skill-level">{skill.level}</span>
+                </div>
+                <div class="skill-progress-bar">
+                  <div class="skill-progress-fill"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Quick All-Skills Cloud -->
+    <div class="all-skills-strip glass-card">
+      <span class="strip-label">DIRECT KEYWORD MATCH:</span>
+      <div class="badges-flow">
+        {allSkills.map((skill) => (
+          <span class="tech-badge highlight">{skill}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-section {
+    position: relative;
+  }
+
+  /* Pipeline Card */
+  .pipeline-card {
+    margin-bottom: 40px;
+    padding: 24px;
+    background: rgba(10, 14, 22, 0.8);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+  }
+  .pipeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .pipeline-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--sky);
+    letter-spacing: 0.06em;
+  }
+  .pipeline-status {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .pipeline-nodes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 8px 0;
+  }
+  .node-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .pipeline-node {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    min-width: 140px;
+    transition: all 0.2s ease;
+  }
+  .pipeline-node:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    background: rgba(56, 189, 248, 0.06);
+    transform: translateY(-2px);
+  }
+  .node-step {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--sky);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .node-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .node-desc {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+  .node-arrow {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    font-family: var(--font-mono);
+  }
+
+  /* Filter Tabs */
+  .skills-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .skill-tab {
+    padding: 9px 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .skill-tab:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--border-medium);
+  }
+  .skill-tab.active {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: var(--sky);
+    color: var(--sky);
+    font-weight: 600;
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
+  }
+
+  /* Category Cards Grid */
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .category-card {
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .cat-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .cat-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .cat-count {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--sky);
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+  }
+
+  /* Skills Pills */
+  .skills-pills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .skill-pill {
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+  }
+  .skill-pill:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(56, 189, 248, 0.3);
+    transform: translateX(4px);
+  }
+  .skill-pill-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .skill-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .skill-level {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--sky);
+  }
+  .skill-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+  .skill-progress-fill {
+    height: 100%;
+    width: 88%;
+    background: linear-gradient(90deg, #06b6d4, #a855f7);
+    border-radius: var(--radius-full);
+  }
+
+  /* All Skills Quick Strip */
+  .all-skills-strip {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 18px 24px;
+  }
+  .strip-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .badges-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 860px) {
+    .categories-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  function initSkillsTabs() {
+    const tabs = document.querySelectorAll('.skill-tab');
+    const cards = document.querySelectorAll('.category-card');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const filter = tab.getAttribute('data-filter');
+
+        tabs.forEach((t) => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        cards.forEach((card) => {
+          const cat = card.getAttribute('data-category');
+          if (filter === 'all' || cat === filter) {
+            (card as HTMLElement).style.display = 'flex';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  initSkillsTabs();
+  document.addEventListener('astro:page-load', initSkillsTabs);
+</script>
