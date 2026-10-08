@@ -191,6 +191,7 @@ AUTHORITATIVE KNOWLEDGE BASE:
   • Salesforce Developer — SmartInternz
 - Contact Details:
   • Email: aravindyallao@gmail.com
+  • Phone: +91 7729804283
   • LinkedIn: https://www.linkedin.com/in/aravind-naidu-yalla-b50953288
   • GitHub: https://github.com/Aravindyalla
   • Resume: /resume.pdf
@@ -569,7 +570,7 @@ export function getOfflineAnswer(query: string): AgentAnswer {
     q.includes("message")
   ) {
     return {
-      text: "You can reach Aravind directly via:\n• Email: aravindyallao@gmail.com\n• LinkedIn: linkedin.com/in/aravind-naidu-yalla-b50953288\n• GitHub: github.com/Aravindyalla",
+      text: "You can reach Aravind directly via:\n• Email: aravindyallao@gmail.com\n• Phone: +91 7729804283\n• LinkedIn: linkedin.com/in/aravind-naidu-yalla-b50953288\n• GitHub: github.com/Aravindyalla",
       action: {
         type: "contact",
         label: "Go to Contact Form",

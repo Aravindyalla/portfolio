@@ -158,6 +158,24 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
                 <span>Copy</span>
               </button>
             </div>
+
+            <div class="copy-box">
+              <span class="copy-label">PHONE:</span>
+              <code class="copy-code">{personal.phone}</code>
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                data-copy={personal.phone}
+                data-copy-msg="Phone number copied to clipboard!"
+                aria-label="Copy Phone number"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
           </div>
         </div>
 
