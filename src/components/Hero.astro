@@ -158,19 +158,62 @@ const { personal, stats } = portfolioData;
             <div class="terminal-badge">ONLINE</div>
           </div>
 
-          <!-- Avatar with tech frame -->
-          <div class="avatar-container">
-            <div class="avatar-ring">
-              <img
-                src={personal.avatar}
-                alt={personal.name}
-                class="avatar-image"
-                width="320"
-                height="320"
-                loading="eager"
-              />
+          <!-- Professional AI / Technology System Visual (Typography & Architecture) -->
+          <div class="ai-visual-console">
+            <!-- Console Header Badge -->
+            <div class="console-identity">
+              <div class="identity-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+              <div class="identity-text">
+                <span class="identity-name">{personal.name}</span>
+                <span class="identity-role">{personal.role} &bull; {personal.company}</span>
+              </div>
             </div>
-            
+
+            <!-- Architecture Matrix Nodes -->
+            <div class="console-nodes-grid">
+              <div class="node-box">
+                <div class="node-box-header">
+                  <span class="node-box-dot dot-cyan"></span>
+                  <span class="node-box-tag">VECTOR ENGINE</span>
+                </div>
+                <span class="node-box-title">Qdrant Vector DB</span>
+                <span class="node-box-sub">Dense Embeddings &bull; Sub-120ms</span>
+              </div>
+
+              <div class="node-box">
+                <div class="node-box-header">
+                  <span class="node-box-dot dot-purple"></span>
+                  <span class="node-box-tag">LOCAL INFERENCE</span>
+                </div>
+                <span class="node-box-title">Ollama &bull; Hugging Face</span>
+                <span class="node-box-sub">Foundation LLM Serving</span>
+              </div>
+
+              <div class="node-box">
+                <div class="node-box-header">
+                  <span class="node-box-dot dot-sky"></span>
+                  <span class="node-box-tag">BACKEND APIS</span>
+                </div>
+                <span class="node-box-title">Python &bull; FastAPI</span>
+                <span class="node-box-sub">Async Microservices &bull; PostgreSQL</span>
+              </div>
+
+              <div class="node-box">
+                <div class="node-box-header">
+                  <span class="node-box-dot dot-emerald"></span>
+                  <span class="node-box-tag">DEPLOYMENT</span>
+                </div>
+                <span class="node-box-title">IIS &bull; NSSM</span>
+                <span class="node-box-sub">Windows Service Orchestration</span>
+              </div>
+            </div>
+
             <!-- Floating Badge: Model Serving -->
             <div class="floating-chip chip-top-right">
               <span class="chip-dot"></span>
@@ -187,23 +230,23 @@ const { personal, stats } = portfolioData;
           <!-- Quick Info Strip -->
           <div class="profile-card-meta">
             <div class="meta-item">
-              <span class="meta-label">CURRENT ROLE</span>
+              <span class="meta-label">ROLE</span>
               <span class="meta-value">{personal.role}</span>
             </div>
             <div class="meta-divider"></div>
             <div class="meta-item">
-              <span class="meta-label">COMPANY</span>
-              <span class="meta-value">{personal.company}</span>
+              <span class="meta-label">FOCUS</span>
+              <span class="meta-value">Production AI Systems</span>
             </div>
           </div>
 
-          <!-- Code Snippet Accordion -->
+          <!-- Code Snippet Terminal -->
           <div class="code-preview-snippet">
             <div class="code-line"><span class="c-kw">from</span> fastapi <span class="c-kw">import</span> FastAPI</div>
             <div class="code-line"><span class="c-kw">from</span> qdrant_client <span class="c-kw">import</span> QdrantClient</div>
-            <div class="code-line"><span class="c-kw">class</span> <span class="c-fn">EnterpriseRAG</span>:</div>
-            <div class="code-line indent"><span class="c-kw">async def</span> <span class="c-fn">query</span>(self, prompt: str):</div>
-            <div class="code-line indent2"><span class="c-ret">return await</span> self.synthesize(prompt)</div>
+            <div class="code-line"><span class="c-kw">class</span> <span class="c-fn">EnterpriseRAGChatbot</span>:</div>
+            <div class="code-line indent"><span class="c-kw">async def</span> <span class="c-fn">answer</span>(self, query: str):</div>
+            <div class="code-line indent2"><span class="c-ret">return await</span> self.ollama_generate(query)</div>
           </div>
         </div>
       </div>
@@ -442,33 +485,109 @@ const { personal, stats } = portfolioData;
     border: 1px solid rgba(16, 185, 129, 0.3);
   }
 
-  /* Avatar Area */
-  .avatar-container {
+  /* Professional AI System Visual Console */
+  .ai-visual-console {
     position: relative;
     width: 100%;
-    aspect-ratio: 1 / 1;
+    background: rgba(6, 9, 14, 0.75);
+    border: 1px solid rgba(56, 189, 248, 0.2);
     border-radius: var(--radius-lg);
-    overflow: visible;
+    padding: 18px;
     margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
-  .avatar-ring {
-    width: 100%;
-    height: 100%;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    position: relative;
-    border: 1px solid rgba(56, 189, 248, 0.25);
-    background: #090d14;
+
+  .console-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-subtle);
   }
-  .avatar-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
+  .identity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2));
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sky);
+    flex-shrink: 0;
   }
-  .profile-card:hover .avatar-image {
-    transform: scale(1.02);
+  .identity-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .identity-name {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+  .identity-role {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--sky);
+  }
+
+  /* Matrix of Nodes */
+  .console-nodes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .node-box {
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    transition: all 0.2s ease;
+  }
+  .node-box:hover {
+    border-color: rgba(56, 189, 248, 0.35);
+    background: rgba(56, 189, 248, 0.05);
+    transform: translateY(-2px);
+  }
+  .node-box-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+  }
+  .node-box-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .dot-cyan { background: #06b6d4; box-shadow: 0 0 6px #06b6d4; }
+  .dot-purple { background: #a855f7; box-shadow: 0 0 6px #a855f7; }
+  .dot-sky { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+  .dot-emerald { background: #10b981; box-shadow: 0 0 6px #10b981; }
+
+  .node-box-tag {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .node-box-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .node-box-sub {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-muted);
   }
 
   /* Floating Chips */

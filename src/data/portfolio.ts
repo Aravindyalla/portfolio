@@ -43,14 +43,17 @@ export interface SkillCategory {
 }
 
 export interface EducationItem {
-  degree: string;
   institution: string;
-  location: string;
+  degree: string;
+  field: string;
+  displayTitle: string;
+  startDate: string;
+  endDate: string;
   period: string;
   grade: string;
+  location: string;
+  affiliatedUniversity: string;
   description: string;
-  coursework: string[];
-  highlights: string[];
 }
 
 export interface CertificationItem {
@@ -70,7 +73,6 @@ export interface PortfolioData {
     shortDescription: string;
     about: string;
     aboutSecondary: string;
-    avatar: string;
     ogImage: string;
     resumeUrl: string;
     phone: string;
@@ -108,7 +110,6 @@ export const portfolioData: PortfolioData = {
       "AI Software Engineer with 1 year of hands-on experience building and deploying AI-powered applications and backend systems. Experienced in Python, FastAPI, LLMs, RAG, embeddings, semantic search, Qdrant, Ollama, Hugging Face and PostgreSQL.",
     aboutSecondary:
       "At People Media Factory, I have worked across the development lifecycle—from understanding requirements and designing solutions to deployment, debugging and maintenance. I enjoy turning real-world business requirements into practical software and AI solutions.",
-    avatar: "/images/avatar.jpg",
     ogImage: "/images/og-card.jpg",
     resumeUrl: "/resume.pdf",
     phone: "+91 7729804283",
@@ -429,25 +430,18 @@ export const portfolioData: PortfolioData = {
   ],
   education: [
     {
-      degree: "B.Tech in Computer Science (Data Science)",
       institution: "Kakinada Institute of Engineering and Technology",
-      location: "Andhra Pradesh, India",
-      period: "2021 – 2025",
-      grade: "CGPA: 7.5",
+      degree: "Bachelor of Technology (B.Tech)",
+      field: "Computer Science (Data Science)",
+      displayTitle: "B.Tech — Computer Science (Data Science)",
+      startDate: "December 2021",
+      endDate: "April 2025",
+      period: "December 2021 – April 2025",
+      grade: "CGPA: 7.5 / 10",
+      location: "Kakinada, Andhra Pradesh, India",
+      affiliatedUniversity: "Jawaharlal Nehru Technological University Kakinada (JNTUK)",
       description:
-        "Specialized in Data Science, Machine Learning, Statistical Analysis, Algorithms, and Core Computer Science engineering principles.",
-      coursework: [
-        "Data Science & Statistical Modeling",
-        "Machine Learning & Deep Learning",
-        "Data Structures & Algorithms (DSA)",
-        "Database Management Systems (SQL / DBMS)",
-        "Python Programming & Object-Oriented Design",
-      ],
-      highlights: [
-        "Specialization in Data Science with a strong focus on predictive modeling and data engineering.",
-        "Graduated with 7.5 CGPA from Kakinada Institute of Engineering and Technology (2021–2025).",
-        "Built foundational projects applying machine learning algorithms and statistical data analysis.",
-      ],
+        "B.Tech in Computer Science (Data Science), affiliated with Jawaharlal Nehru Technological University Kakinada (JNTUK). Graduated in 2025 with a CGPA of 7.5/10.",
     },
   ],
   certifications: [

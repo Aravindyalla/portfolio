@@ -245,14 +245,15 @@ def create_resume():
     story.append(Paragraph("<b>EDUCATION & CERTIFICATIONS</b>", section_heading))
     edu_header = [
         [
-            Paragraph("<b>B.Tech in Computer Science (Data Science)</b> &mdash; CGPA: 7.5", item_title),
-            Paragraph("2021 &ndash; 2025", contact_style)
+            Paragraph("<b>B.Tech &mdash; Computer Science (Data Science)</b> &bull; CGPA: 7.5 / 10", item_title),
+            Paragraph("Dec 2021 &ndash; Apr 2025", contact_style)
         ]
     ]
     t_edu = Table(edu_header, colWidths=[5.5*inch, 2.0*inch])
     t_edu.setStyle(TableStyle([('VALIGN', (0,0), (-1,-1), 'TOP'), ('ALIGN', (1,0), (1,-1), 'RIGHT')]))
     story.append(t_edu)
-    story.append(Paragraph("Kakinada Institute of Engineering and Technology", item_sub))
+    story.append(Paragraph("Kakinada Institute of Engineering and Technology &bull; Kakinada, Andhra Pradesh", item_sub))
+    story.append(Paragraph("<i>Affiliated to Jawaharlal Nehru Technological University Kakinada (JNTUK)</i>", body_style))
     story.append(Paragraph("&bull; <b>Certifications:</b> Python for Data Science (Infosys Springboard) &bull; Salesforce Developer (SmartInternz)", bullet_style))
 
     doc.build(story)

@@ -11,22 +11,22 @@ const { education, certifications } = portfolioData;
     <div class="section-header">
       <div class="section-tag">
         <span class="dot"></span>
-        <span>Foundations & Credentials</span>
+        <span>Academic Background</span>
       </div>
       <h2 class="section-title">
-        Education & <span class="text-gradient">Certifications</span>
+        Education & <span class="text-gradient">Credentials</span>
       </h2>
       <p class="section-subtitle">
-        Foundational degree in Computer Science & Data Science, complemented by verified industry certifications.
+        Foundational technical degree in Data Science and verified certifications.
       </p>
     </div>
 
     <!-- Education & Certifications Layout -->
     <div class="education-layout">
-      <!-- Degree Card -->
+      <!-- Clean Professional Education Card -->
       {education.map((edu) => (
         <div class="education-card glass-card">
-          <div class="edu-top-row">
+          <div class="edu-card-header">
             <div class="edu-icon-badge">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
@@ -35,61 +35,57 @@ const { education, certifications } = portfolioData;
             </div>
 
             <div class="edu-title-group">
-              <h3 class="edu-degree">{edu.degree}</h3>
-              <p class="edu-inst">
-                <span>{edu.institution}</span> &bull; <span class="edu-loc">{edu.location}</span>
+              <h3 class="edu-degree">{edu.displayTitle}</h3>
+              <p class="edu-inst">{edu.institution}</p>
+              <p class="edu-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                {edu.location}
               </p>
             </div>
 
             <div class="edu-meta-badges">
-              <span class="edu-badge">{edu.period}</span>
-              <span class="edu-grade-badge">{edu.grade}</span>
+              <span class="edu-period-badge">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                {edu.period}
+              </span>
+              <span class="edu-grade-badge">CGPA: 7.5 / 10</span>
             </div>
           </div>
 
           <p class="edu-desc">{edu.description}</p>
 
-          <!-- Relevant Coursework -->
-          <div class="edu-coursework-section">
-            <h4 class="coursework-heading">RELEVANT TECHNICAL COURSEWORK:</h4>
-            <div class="coursework-chips">
-              {edu.coursework.map((course) => (
-                <span class="tech-badge highlight">{course}</span>
-              ))}
-            </div>
-          </div>
-
-          <!-- Academic Highlights -->
-          <div class="edu-highlights-section">
-            <h4 class="highlights-heading">ACADEMIC HIGHLIGHTS:</h4>
-            <ul class="edu-highlights-list">
-              {edu.highlights.map((item) => (
-                <li class="edu-hl-item">
-                  <span class="check-mark">&bull;</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
+          <!-- Affiliated University Strip -->
+          <div class="edu-affiliation-box">
+            <span class="affiliation-label">AFFILIATED TO:</span>
+            <span class="affiliation-value">{edu.affiliatedUniversity}</span>
           </div>
         </div>
       ))}
 
-      <!-- Certifications Grid -->
+      <!-- Certifications -->
       <div class="certifications-block">
         <h3 class="cert-heading">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky">
-            <path d="M12 15l-2 5l9-9l-9-9l2 5l-7 4z"></path>
+            <circle cx="12" cy="8" r="7"></circle>
+            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
           </svg>
-          Industry Certifications
+          Certifications
         </h3>
 
         <div class="certs-grid">
           {certifications.map((cert) => (
             <div class="cert-card glass-card">
               <div class="cert-icon-wrap">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="8" r="7"></circle>
-                  <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
               </div>
               <div class="cert-info">
@@ -113,20 +109,20 @@ const { education, certifications } = portfolioData;
   .education-layout {
     display: flex;
     flex-direction: column;
-    gap: 32px;
-    max-width: 980px;
+    gap: 28px;
+    max-width: 920px;
     margin: 0 auto;
   }
 
   .education-card {
-    padding: 32px;
+    padding: 28px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     background: rgba(12, 16, 24, 0.85);
   }
 
-  .edu-top-row {
+  .edu-card-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -134,10 +130,10 @@ const { education, certifications } = portfolioData;
     gap: 16px;
   }
   .edu-icon-badge {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: var(--radius-md);
-    background: rgba(168, 85, 247, 0.1);
+    background: rgba(168, 85, 247, 0.12);
     border: 1px solid rgba(168, 85, 247, 0.3);
     color: var(--violet);
     display: flex;
@@ -148,139 +144,127 @@ const { education, certifications } = portfolioData;
   .edu-title-group {
     flex: 1;
     min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
   .edu-degree {
     font-size: 1.25rem;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--text-primary);
-    margin-bottom: 4px;
+    line-height: 1.3;
   }
   .edu-inst {
-    font-size: 0.92rem;
-    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #e2e8f0;
   }
-  .edu-loc {
-    color: var(--sky);
+  .edu-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
     font-family: var(--font-mono);
   }
+
   .edu-meta-badges {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
   }
-  .edu-badge {
+  .edu-period-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    padding: 4px 12px;
+    font-size: 0.78rem;
+    padding: 5px 12px;
     border-radius: var(--radius-full);
-    background: rgba(56, 189, 248, 0.1);
+    background: rgba(56, 189, 248, 0.08);
     border: 1px solid rgba(56, 189, 248, 0.25);
     color: var(--sky);
+    font-weight: 500;
   }
   .edu-grade-badge {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    padding: 4px 12px;
+    font-size: 0.78rem;
+    padding: 5px 12px;
     border-radius: var(--radius-full);
     background: rgba(16, 185, 129, 0.12);
     border: 1px solid rgba(16, 185, 129, 0.3);
     color: #34d399;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .edu-desc {
     font-size: 0.95rem;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
-  .edu-coursework-section {
+  /* Affiliation Box */
+  .edu-affiliation-box {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 10px;
-  }
-  .coursework-heading {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-  }
-  .coursework-chips {
-    display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
   }
-
-  .edu-highlights-section {
-    padding-top: 16px;
-    border-top: 1px solid var(--border-subtle);
-  }
-  .highlights-heading {
+  .affiliation-label {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     font-weight: 700;
     color: var(--text-muted);
-    letter-spacing: 0.05em;
-    margin-bottom: 10px;
+    letter-spacing: 0.06em;
   }
-  .edu-highlights-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .edu-hl-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
+  .affiliation-value {
     font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-  }
-  .check-mark {
-    color: var(--violet);
-    font-size: 1.2rem;
-    line-height: 1;
+    font-weight: 600;
+    color: #38bdf8;
   }
 
   /* Certifications Block */
   .certifications-block {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+    margin-top: 6px;
   }
   .cert-heading {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 1.15rem;
+    gap: 8px;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--text-primary);
   }
   .certs-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 14px;
   }
   .cert-card {
-    padding: 20px;
+    padding: 16px 18px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     background: rgba(12, 16, 24, 0.75);
     border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
   }
   .cert-card:hover {
     border-color: rgba(56, 189, 248, 0.35);
     transform: translateY(-2px);
   }
   .cert-icon-wrap {
-    width: 42px;
-    height: 42px;
-    border-radius: var(--radius-md);
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
     background: rgba(56, 189, 248, 0.1);
     border: 1px solid rgba(56, 189, 248, 0.25);
     color: var(--sky);
@@ -296,23 +280,24 @@ const { education, certifications } = portfolioData;
     gap: 2px;
   }
   .cert-title {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: var(--text-primary);
     line-height: 1.3;
   }
   .cert-issuer {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     color: var(--text-secondary);
   }
   .cert-tag {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     color: var(--text-muted);
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-subtle);
-    padding: 3px 8px;
+    padding: 2px 7px;
     border-radius: var(--radius-sm);
+    white-space: nowrap;
   }
 
   @media (max-width: 768px) {
@@ -321,6 +306,9 @@ const { education, certifications } = portfolioData;
     }
     .certs-grid {
       grid-template-columns: 1fr;
+    }
+    .edu-card-header {
+      flex-direction: column;
     }
   }
 </style>
