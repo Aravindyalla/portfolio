@@ -73,10 +73,13 @@ const pipelineNodes = [
     <!-- Skills Category Cards Grid -->
     <div class="categories-grid">
       {skillCategories.map((cat, idx) => (
-        <div class="category-card glass-card" data-category={`cat-${idx}`}>
+        <div class={`category-card glass-card ${cat.badge ? 'is-exploring-card' : ''}`} data-category={`cat-${idx}`}>
           <div class="cat-top">
             <div class="cat-title-block">
-              <h3 class="cat-title">{cat.title}</h3>
+              <div class="cat-title-row">
+                <h3 class="cat-title">{cat.title}</h3>
+                {cat.badge && <span class="exploring-pill">{cat.badge}</span>}
+              </div>
               <p class="cat-desc">{cat.description}</p>
             </div>
             <span class="cat-count">{cat.skills.length} skills</span>
@@ -84,13 +87,13 @@ const pipelineNodes = [
 
           <div class="skills-pills-list">
             {cat.skills.map((skill) => (
-              <div class="skill-pill">
+              <div class={`skill-pill ${skill.isExploring ? 'exploring-pill-item' : ''}`}>
                 <div class="skill-pill-main">
                   <span class="skill-name">{skill.name}</span>
-                  <span class="skill-level">{skill.level}</span>
+                  <span class={`skill-level ${skill.isExploring ? 'level-exploring' : ''}`}>{skill.level}</span>
                 </div>
                 <div class="skill-progress-bar">
-                  <div class="skill-progress-fill"></div>
+                  <div class={`skill-progress-fill ${skill.isExploring ? 'fill-exploring' : ''}`}></div>
                 </div>
               </div>
             ))}
@@ -250,11 +253,37 @@ const pipelineNodes = [
     align-items: flex-start;
     gap: 12px;
   }
+  .cat-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+  }
+  .exploring-pill {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--amber);
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+  }
+  .level-exploring {
+    color: var(--amber) !important;
+  }
+  .fill-exploring {
+    background: linear-gradient(90deg, #f59e0b, #ec4899) !important;
+    width: 65% !important;
+  }
+  .is-exploring-card {
+    border-color: rgba(245, 158, 11, 0.2);
+  }
   .cat-title {
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 4px;
   }
   .cat-desc {
     font-size: 0.85rem;

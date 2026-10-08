@@ -10,27 +10,36 @@ export interface Project {
   featured: boolean;
   metrics?: { label: string; value: string }[];
   architectureSteps?: string[];
+  visualWorkflow?: string[];
+}
+
+export interface ExperienceRole {
+  title: string;
+  period: string;
+  type: string;
 }
 
 export interface ExperienceItem {
   company: string;
   role: string;
-  period: string;
-  type: string;
   location: string;
+  roles: ExperienceRole[];
   description: string;
   highlights: string[];
   technologies: string[];
 }
 
+export interface SkillItem {
+  name: string;
+  level: string;
+  isExploring?: boolean;
+}
+
 export interface SkillCategory {
   title: string;
   description: string;
-  skills: {
-    name: string;
-    level: string; // e.g. "Core Expertise", "Proficient", "Production Use"
-    icon?: string;
-  }[];
+  badge?: string;
+  skills: SkillItem[];
 }
 
 export interface EducationItem {
@@ -38,9 +47,16 @@ export interface EducationItem {
   institution: string;
   location: string;
   period: string;
+  grade: string;
   description: string;
   coursework: string[];
   highlights: string[];
+}
+
+export interface CertificationItem {
+  title: string;
+  issuer: string;
+  badge: string;
 }
 
 export interface PortfolioData {
@@ -51,10 +67,13 @@ export interface PortfolioData {
     location: string;
     experience: string;
     headline: string;
+    shortDescription: string;
     about: string;
+    aboutSecondary: string;
     avatar: string;
     ogImage: string;
     resumeUrl: string;
+    phone: string;
     email: string;
     linkedin: string;
     github: string;
@@ -66,6 +85,7 @@ export interface PortfolioData {
   experiences: ExperienceItem[];
   projects: Project[];
   education: EducationItem[];
+  certifications: CertificationItem[];
   focusAreas: {
     title: string;
     icon: string;
@@ -76,130 +96,184 @@ export interface PortfolioData {
 
 export const portfolioData: PortfolioData = {
   personal: {
-    name: "Aravind Naidu Yalla",
-    role: "AI Engineer",
+    name: "ARAVIND NAIDU YALLA",
+    role: "AI Software Engineer",
     company: "People Media Factory",
     location: "Hyderabad, India",
     experience: "1 Year Professional Experience (including Internship)",
-    headline: "AI Engineer | Generative AI | LLMs | RAG",
+    headline: "Production AI Systems · Python · Generative AI",
+    shortDescription:
+      "AI Software Engineer building practical AI applications and backend systems using Python, LLMs, RAG, FastAPI, vector databases and modern AI technologies.",
     about:
-      "I am an AI Engineer working at People Media Factory with around 1 year of professional experience including my internship. I build AI-powered applications using Python, FastAPI, Large Language Models, Retrieval-Augmented Generation, embeddings, semantic search and vector databases. I am particularly interested in Generative AI, LLM applications and Agentic AI.",
+      "AI Software Engineer with 1 year of hands-on experience building and deploying AI-powered applications and backend systems. Experienced in Python, FastAPI, LLMs, RAG, embeddings, semantic search, Qdrant, Ollama, Hugging Face and PostgreSQL.",
+    aboutSecondary:
+      "At People Media Factory, I have worked across the development lifecycle—from understanding requirements and designing solutions to deployment, debugging and maintenance. I enjoy turning real-world business requirements into practical software and AI solutions.",
     avatar: "/images/avatar.jpg",
     ogImage: "/images/og-card.jpg",
     resumeUrl: "/resume.pdf",
-    email: "aravindyall@gmail.com",
+    phone: "+91 7729804283",
+    email: "aravindyallao@gmail.com",
     linkedin: "https://www.linkedin.com/in/aravind-naidu-yalla-b50953288",
     github: "https://github.com/Aravindyalla",
-    status: "Open to AI Engineering & GenAI Roles",
+    status: "AI Developer / AI Software Engineer – People Media Factory",
   },
   stats: [
-    { label: "Experience", value: "1 Year", detail: "Industry + Production Internship" },
-    { label: "Core Focus", value: "GenAI & RAG", detail: "LLMs, Vectors & Semantic Search" },
-    { label: "Primary Stack", value: "Python / FastAPI", detail: "Asynchronous High-Throughput APIs" },
-    { label: "Vector Search", value: "Qdrant", detail: "Sub-100ms Embedding Retrieval" },
+    { label: "Experience", value: "1 Year", detail: "May 2026 – Present (Full-Time) | Oct 2025 – Apr 2026 (Intern)" },
+    { label: "Core Stack", value: "Python & FastAPI", detail: "REST APIs, Backend Services, Microservices" },
+    { label: "AI & Retrieval", value: "RAG & LLMs", detail: "Qdrant Vector DB, Ollama, Hugging Face" },
+    { label: "Deployment", value: "IIS & NSSM", detail: "Production Windows Server & Service Orchestration" },
   ],
   focusAreas: [
     {
       title: "Generative AI & LLMs",
       icon: "brain",
       description:
-        "Building prompt chains, structured outputs, local LLM serving with Ollama, and open-source foundation model integrations using Hugging Face.",
-      tags: ["Ollama", "Hugging Face", "Prompt Tuning", "Model Quantization"],
+        "Building prompt chains, structured outputs, local LLM hosting with Ollama, and open-source foundation model integrations with Hugging Face.",
+      tags: ["Ollama", "Hugging Face", "LLMs", "Prompt Engineering"],
     },
     {
       title: "Retrieval-Augmented Generation (RAG)",
       icon: "database",
       description:
-        "Architecting multi-document RAG systems featuring OCR ingestion, semantic chunking, embedding generation, and high-dimensional vector search with Qdrant.",
-      tags: ["Qdrant", "Embeddings", "Semantic Search", "Hybrid Retrieval"],
+        "Architecting end-to-end document intelligence pipelines featuring OCR text extraction, semantic chunking, dense embeddings, and Qdrant vector retrieval.",
+      tags: ["Qdrant", "Embeddings", "Semantic Search", "OCR"],
     },
     {
       title: "Production Backend & APIs",
       icon: "server",
       description:
-        "Designing scalable REST APIs and streaming microservices with Python and FastAPI, coupled with reliable PostgreSQL data models.",
-      tags: ["Python", "FastAPI", "PostgreSQL", "REST APIs", "AsyncIO"],
+        "Developing robust REST APIs and services with Python and FastAPI, coupled with PostgreSQL data schemas, SQLAlchemy, and query optimization.",
+      tags: ["Python", "FastAPI", "PostgreSQL", "REST APIs", "SQLAlchemy"],
     },
     {
-      title: "Agentic AI & Experimentation",
+      title: "Deployment & Operations",
       icon: "sparkles",
       description:
-        "Developing autonomous AI workflows, multi-step tool calling, continuous experimentation, and benchmarking for real-world studio media production.",
-      tags: ["Agentic Workflows", "Tool Calling", "Evaluation", "Automation"],
+        "Deploying and maintaining production backend services using IIS and NSSM, diagnosing production issues, and ensuring reliability.",
+      tags: ["IIS", "NSSM", "Debugging", "Git/GitHub", "Optimization"],
     },
   ],
   allSkills: [
     "Python",
-    "Generative AI",
     "LLMs",
+    "Generative AI",
     "RAG",
-    "FastAPI",
-    "REST APIs",
-    "Qdrant",
-    "Vector Databases",
+    "Prompt Engineering",
     "Embeddings",
     "Semantic Search",
-    "Ollama",
     "Hugging Face",
+    "Ollama",
+    "FastAPI",
+    "REST APIs",
+    "Flask",
+    "Pydantic",
+    "SQLAlchemy",
+    "OOP",
     "PostgreSQL",
+    "Qdrant",
+    "SQL",
     "Git",
     "GitHub",
+    "Debugging",
+    "Troubleshooting",
+    "API Design",
+    "IIS",
+    "NSSM",
+    "Agentic AI",
+    "LangChain",
+    "LangGraph",
+    "Tool Calling",
   ],
   skillCategories: [
     {
-      title: "Generative AI & LLMs",
-      description: "Foundation model serving, local inference, and fine-grained prompt orchestration.",
-      skills: [
-        { name: "Generative AI", level: "Production Focus" },
-        { name: "LLMs", level: "Production Focus" },
-        { name: "RAG", level: "Production Focus" },
-        { name: "Ollama", level: "Inference & Serving" },
-        { name: "Hugging Face", level: "Model Integration" },
-      ],
-    },
-    {
-      title: "Vector Search & Retrieval",
-      description: "Dense embedding generation, semantic similarity scoring, and vector stores.",
-      skills: [
-        { name: "Qdrant", level: "Vector Database" },
-        { name: "Vector Databases", level: "Architecture & Ops" },
-        { name: "Embeddings", level: "Semantic Representation" },
-        { name: "Semantic Search", level: "Similarity Scoring" },
-      ],
-    },
-    {
-      title: "Backend & Systems",
-      description: "High-performance asynchronous APIs, microservices, and persistence.",
+      title: "AI & Generative AI",
+      description: "Foundation model integration, prompt engineering, semantic retrieval, and local inference.",
       skills: [
         { name: "Python", level: "Primary Language" },
-        { name: "FastAPI", level: "API Framework" },
-        { name: "REST APIs", level: "Endpoint Architecture" },
-        { name: "PostgreSQL", level: "Relational Database" },
+        { name: "LLMs", level: "Production Focus" },
+        { name: "Generative AI", level: "Core Domain" },
+        { name: "RAG", level: "System Architecture" },
+        { name: "Prompt Engineering", level: "Production Use" },
+        { name: "Embeddings", level: "Semantic Representation" },
+        { name: "Semantic Search", level: "Similarity Scoring" },
+        { name: "Hugging Face", level: "Model Integration" },
+        { name: "Ollama", level: "Local Inference" },
       ],
     },
     {
-      title: "Tooling & Collaboration",
-      description: "Version control, deployment pipelines, and collaborative workflows.",
+      title: "Backend",
+      description: "High-performance asynchronous APIs, object-oriented design, and robust data schemas.",
+      skills: [
+        { name: "FastAPI", level: "Production Framework" },
+        { name: "REST APIs", level: "Endpoint Architecture" },
+        { name: "Flask", level: "Web Framework" },
+        { name: "Pydantic", level: "Data Validation" },
+        { name: "SQLAlchemy", level: "ORM & Querying" },
+        { name: "OOP", level: "Software Design" },
+      ],
+    },
+    {
+      title: "Databases",
+      description: "Relational persistence and high-dimensional vector databases for fast similarity search.",
+      skills: [
+        { name: "PostgreSQL", level: "Relational Database" },
+        { name: "Qdrant", level: "Vector Database" },
+        { name: "SQL", level: "Query Optimization" },
+      ],
+    },
+    {
+      title: "Engineering & Operations",
+      description: "Deployment, system troubleshooting, version control, and service management.",
       skills: [
         { name: "Git", level: "Version Control" },
         { name: "GitHub", level: "CI/CD & Collaboration" },
+        { name: "Debugging", level: "Root Cause Analysis" },
+        { name: "Troubleshooting", level: "Production Ops" },
+        { name: "API Design", level: "Contract Architecture" },
+        { name: "IIS", level: "Web Server Deployment" },
+        { name: "NSSM", level: "Windows Service Manager" },
+      ],
+    },
+    {
+      title: "Learning / Exploring",
+      badge: "Actively Exploring",
+      description: "Exploring next-generation autonomous agent loops, tool use, and cognitive workflows.",
+      skills: [
+        { name: "Agentic AI", level: "Exploring / Research", isExploring: true },
+        { name: "LangChain", level: "Exploring / Experimentation", isExploring: true },
+        { name: "LangGraph", level: "Exploring / State Graphs", isExploring: true },
+        { name: "Tool Calling", level: "Exploring / Function Calling", isExploring: true },
       ],
     },
   ],
   experiences: [
     {
       company: "People Media Factory",
-      role: "AI Engineer",
-      period: "October 2025 – Present",
-      type: "Full-Time (Promoted from AI Intern)",
+      role: "AI Developer / AI Software Engineer",
       location: "Hyderabad, India",
+      roles: [
+        {
+          title: "AI Developer / AI Software Engineer",
+          period: "May 2026 – Present",
+          type: "Full-Time",
+        },
+        {
+          title: "AI Intern",
+          period: "October 2025 – April 2026",
+          type: "Internship",
+        },
+      ],
       description:
-        "Started as an AI Intern and transitioned to a full-time AI Engineer. Driving AI engineering initiatives across production studios, developing LLM-driven pipelines, RAG question-answering systems, and resilient Python FastAPI backend microservices.",
+        "Working across the complete development lifecycle—from understanding requirements and designing architectures to deployment, debugging, and continuous maintenance. Driving AI-powered applications, backend services, and document intelligence pipelines.",
       highlights: [
-        "Architected and deployed enterprise-grade AI-powered applications, combining open-source LLMs (via Ollama & Hugging Face) with high-speed FastAPI backends.",
-        "Engineered end-to-end Retrieval-Augmented Generation (RAG) pipelines incorporating multi-format OCR ingestion, chunking algorithms, and Qdrant vector retrieval.",
-        "Created production-grade REST APIs and asynchronous background jobs for media asset workflows and VFX studio task tracking.",
-        "Conducted extensive AI experimentation, prompt engineering, and semantic search tuning to enhance answer accuracy and minimize model hallucinations.",
+        "Built and deployed AI-powered applications using Python, FastAPI, LLMs and RAG.",
+        "Developed backend services and REST APIs for production applications.",
+        "Built document intelligence workflows involving OCR, embeddings, semantic search and vector databases.",
+        "Integrated Hugging Face models and locally hosted LLMs using Ollama.",
+        "Worked with PostgreSQL for application data and query optimization.",
+        "Diagnosed production issues and optimized backend/database performance.",
+        "Deployed and maintained applications using IIS and NSSM.",
+        "Worked with Git/GitHub and collaborated with cross-functional teams.",
       ],
       technologies: [
         "Python",
@@ -210,132 +284,182 @@ export const portfolioData: PortfolioData = {
         "Ollama",
         "Hugging Face",
         "PostgreSQL",
+        "IIS",
+        "NSSM",
         "Git",
       ],
     },
   ],
   projects: [
     {
-      id: "enterprise-rag-system",
-      title: "Enterprise RAG System",
-      badge: "Flagship AI Project",
-      tagline: "Document-Based Question Answering & Semantic Retrieval Engine",
+      id: "enterprise-rag-chatbot",
+      title: "Enterprise RAG Chatbot — Document Intelligence",
+      badge: "Document Intelligence",
+      tagline: "End-to-End Document Question-Answering System",
       description:
-        "Built a robust, enterprise-grade Retrieval-Augmented Generation (RAG) system engineered for complex multi-document question answering. The pipeline ingests diverse formats, runs OCR text extraction, generates semantic embeddings, and queries a high-dimensional Qdrant vector database for sub-second contextual synthesis via local LLMs.",
+        "Built an end-to-end document question-answering system using Retrieval-Augmented Generation.",
       features: [
-        "Document ingestion supporting complex PDF, scanned image, and multi-page enterprise docs",
-        "OCR-based text extraction with preprocessing and noisy artifact filtering",
-        "Text processing, cleaning, and semantic chunking with overlap control",
-        "Dense embedding generation utilizing Hugging Face transformer models",
-        "Qdrant vector database integration for fast filtered nearest-neighbor lookups",
-        "Semantic search with cosine similarity scoring and re-ranking",
-        "LLM-based question answering with strict context grounding and source attribution",
-        "Multi-document retrieval enabling cross-file knowledge synthesis",
+        "Document ingestion",
+        "OCR-based text extraction",
+        "Text processing and chunking",
+        "Embedding generation",
+        "Qdrant vector storage",
+        "Semantic similarity search",
+        "LLM-based question answering",
+        "Multi-document retrieval",
       ],
-      technologies: ["Python", "FastAPI", "Ollama", "Qdrant", "Hugging Face", "PostgreSQL"],
+      visualWorkflow: [
+        "Documents",
+        "OCR / Text Extraction",
+        "Text Processing",
+        "Chunking",
+        "Embeddings",
+        "Qdrant",
+        "Semantic Search",
+        "Relevant Context",
+        "LLM",
+        "Answer",
+      ],
+      technologies: [
+        "Python",
+        "FastAPI",
+        "RAG",
+        "Qdrant",
+        "Ollama",
+        "Hugging Face",
+        "OCR",
+        "Embeddings",
+        "Semantic Search",
+      ],
       image: "/images/project-rag.jpg",
       featured: true,
       metrics: [
-        { label: "Retrieval Latency", value: "<120ms" },
         { label: "Vector DB", value: "Qdrant" },
         { label: "LLM Runner", value: "Ollama" },
-        { label: "Parsing", value: "OCR Engine" },
+        { label: "Embedding", value: "Hugging Face" },
+        { label: "Extraction", value: "OCR Engine" },
       ],
       architectureSteps: [
-        "Multi-format Document Ingestion & OCR Extraction",
-        "Semantic Chunking & Normalization",
-        "Hugging Face Embedding Vectorization",
-        "Qdrant High-Dimensional Vector Indexing",
-        "Top-K Cosine Similarity Retrieval",
-        "Prompt Augmentation & Ollama LLM Response Generation",
+        "Documents Ingestion & OCR Extraction",
+        "Text Processing & Smart Chunking",
+        "Dense Embedding Generation",
+        "Qdrant Vector Storage & Indexing",
+        "Semantic Similarity Search & Relevant Context Extraction",
+        "Augmented Prompting & LLM Grounded Answer Generation",
       ],
     },
     {
-      id: "ai-music-studio",
-      title: "AI Music Studio",
-      badge: "Generative AI & Audio",
-      tagline: "Generative Audio & Music Synthesis Workflows via LLM Orchestration",
+      id: "vfx-production-tracking-system",
+      title: "VFX Production Tracking System",
+      badge: "Studio Operations Platform",
+      tagline: "Production Platform for Managing VFX Artists, Tasks & Work Activity",
       description:
-        "Engineered AI-powered music and audio generation workflows combining LLM integrations with high-performance Python backend APIs. The system coordinates text-to-music prompts, lyrical arrangement structures, and audio synthesis pipelines for studio creatives.",
+        "Built a production tracking platform for managing VFX artists, tasks and work activity.",
       features: [
-        "LLM-assisted composition structuring and lyric arrangement generation",
-        "Generative audio model inference pipelines with prompt conditioning",
-        "Asynchronous task queueing with FastAPI to manage compute-intensive audio synthesis",
-        "Audio waveform processing, format encoding, and streaming playback endpoints",
-        "Interactive parameter controls for tempo, genre blending, and mood guidance",
-        "RESTful API design allowing seamless integration with creative media frontend tools",
+        "Role-based access control",
+        "Artist and supervisor workflows",
+        "Task assignment",
+        "Status tracking",
+        "Working-time tracking",
+        "Activity tracking",
+        "Reporting and analytics",
+        "Production deployment",
       ],
-      technologies: ["Python", "FastAPI", "LLMs", "Generative AI"],
-      image: "/images/project-music.jpg",
-      featured: true,
-      metrics: [
-        { label: "Pipeline", value: "Prompt-to-Audio" },
-        { label: "API Framework", value: "FastAPI Async" },
-        { label: "Workflow", value: "Multi-Track Audio" },
-        { label: "Model Type", value: "Generative AI" },
+      technologies: [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "REST APIs",
+        "IIS",
+        "NSSM",
+        "Git",
       ],
-      architectureSteps: [
-        "User Mood / Style Prompt Ingestion",
-        "LLM Musical Structure & Composition Planning",
-        "Audio Generation Pipeline Execution",
-        "Waveform Normalization & Stem Processing",
-        "Streaming Delivery via FastAPI Endpoints",
-      ],
-    },
-    {
-      id: "vfx-artist-tracking-system",
-      title: "VFX Artist Tracking System",
-      badge: "Production Operations Platform",
-      tagline: "Studio Activity & Task Milestone Management Infrastructure",
-      description:
-        "Designed and implemented an end-to-end production tracking platform tailored for film and media production pipelines. The system enables supervisors to manage VFX artists, shot deadlines, task statuses, and real-time operational activity.",
-      features: [
-        "Granular task breakdown tracking (Modelling, Shading, FX, Lighting, Compositing)",
-        "Real-time artist activity logs, status updates, and working timesheets",
-        "Role-based access control and approval states for studio supervisors",
-        "PostgreSQL relational schema optimized with indexed status lookups and audit trails",
-        "High-performance REST API endpoints built with Python and FastAPI",
-        "Automated notifications and timeline milestone progress visualization",
-      ],
-      technologies: ["Python", "FastAPI", "PostgreSQL", "REST APIs"],
       image: "/images/project-vfx.jpg",
       featured: true,
       metrics: [
         { label: "Database", value: "PostgreSQL" },
         { label: "Backend", value: "FastAPI REST" },
-        { label: "Target Domain", value: "VFX Studio Operations" },
-        { label: "Concurrency", value: "High-Throughput" },
+        { label: "Web Server", value: "IIS" },
+        { label: "Service Host", value: "NSSM" },
       ],
       architectureSteps: [
-        "Shot & Milestone Task Hierarchy Creation",
-        "Artist Activity & Clock-in Logging",
-        "State Transition Pipeline Validation",
-        "PostgreSQL Relational Persistence & Query Optimization",
-        "Supervisor Analytics & Status Reporting API",
+        "Role-Based Authentication & Permissions Setup",
+        "Task Assignment & Status Tracking Pipeline",
+        "Artist Working-Time & Activity Tracking Logs",
+        "PostgreSQL Relational Schema & Query Optimization",
+        "Production Service Deployment via IIS and NSSM",
+      ],
+    },
+    {
+      id: "ai-music-studio",
+      title: "AI Music Studio",
+      badge: "Generative Audio & AI",
+      tagline: "AI-Powered Music & Audio Generation Workflows",
+      description:
+        "Worked on AI-powered music and audio generation workflows involving text prompts, LLM integrations and backend APIs.",
+      features: [
+        "Text prompt to musical audio generation workflows",
+        "LLM integrations for composition guidance and lyric structures",
+        "FastAPI asynchronous backend endpoints for audio inference",
+        "Audio AI model coordination and format processing",
+        "Interactive creative controls and parameter tuning",
+      ],
+      technologies: [
+        "Python",
+        "FastAPI",
+        "Generative AI",
+        "LLMs",
+        "Audio AI",
+      ],
+      image: "/images/project-music.jpg",
+      featured: true,
+      metrics: [
+        { label: "Domain", value: "Audio AI" },
+        { label: "API Framework", value: "FastAPI" },
+        { label: "Core Model", value: "LLMs & GenAI" },
+        { label: "Execution", value: "Async Pipelines" },
+      ],
+      architectureSteps: [
+        "Text Prompt Ingestion & Parameter Conditioning",
+        "LLM Musical Structure & Composition Guidance",
+        "Audio AI Model Inference Execution",
+        "FastAPI Endpoint Delivery & Audio Streaming",
       ],
     },
   ],
   education: [
     {
-      degree: "Bachelor of Technology in Computer Science & Engineering",
-      institution: "JNTUH Affiliated Institute",
-      location: "Hyderabad, India",
-      period: "Graduated with Strong Academic Record",
+      degree: "B.Tech in Computer Science (Data Science)",
+      institution: "Kakinada Institute of Engineering and Technology",
+      location: "Andhra Pradesh, India",
+      period: "2021 – 2025",
+      grade: "CGPA: 7.5",
       description:
-        "Comprehensive foundational education in computer science, software engineering, algorithms, and artificial intelligence.",
+        "Specialized in Data Science, Machine Learning, Statistical Analysis, Algorithms, and Core Computer Science engineering principles.",
       coursework: [
-        "Machine Learning & Artificial Intelligence",
-        "Natural Language Processing (NLP)",
+        "Data Science & Statistical Modeling",
+        "Machine Learning & Deep Learning",
         "Data Structures & Algorithms (DSA)",
-        "Database Management Systems (DBMS)",
-        "Distributed Computing & Operating Systems",
-        "Object-Oriented Programming (OOP)",
+        "Database Management Systems (SQL / DBMS)",
+        "Python Programming & Object-Oriented Design",
       ],
       highlights: [
-        "Focused academic research on natural language processing and semantic information retrieval.",
-        "Built machine learning projects exploring vector embeddings and text categorization.",
-        "Active technical contributor in algorithmic programming and modern software design.",
+        "Specialization in Data Science with a strong focus on predictive modeling and data engineering.",
+        "Graduated with 7.5 CGPA from Kakinada Institute of Engineering and Technology (2021–2025).",
+        "Built foundational projects applying machine learning algorithms and statistical data analysis.",
       ],
+    },
+  ],
+  certifications: [
+    {
+      title: "Python for Data Science",
+      issuer: "Infosys Springboard",
+      badge: "Data Science & Python",
+    },
+    {
+      title: "Salesforce Developer",
+      issuer: "SmartInternz",
+      badge: "Developer Certification",
     },
   ],
 };

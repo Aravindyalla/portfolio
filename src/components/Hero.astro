@@ -26,7 +26,7 @@ const { personal, stats } = portfolioData;
       <h1 class="hero-title">
         Hi, I'm <span class="hero-name text-gradient">{personal.name}</span>
         <span class="hero-role-block">
-          <span class="terminal-prompt">&gt;</span> AI Engineer
+          <span class="terminal-prompt">&gt;</span> {personal.role}
         </span>
       </h1>
 
@@ -39,9 +39,7 @@ const { personal, stats } = portfolioData;
 
       <!-- Bio / Subtext -->
       <p class="hero-description">
-        AI Engineer at <strong>{personal.company}</strong> with <strong>{personal.experience}</strong>. 
-        Specialized in engineering end-to-end <em>Generative AI systems</em>, production <em>RAG architectures</em>, 
-        vector databases (<em>Qdrant</em>), and high-throughput <em>FastAPI</em> backends.
+        {personal.shortDescription}
       </p>
 
       <!-- Primary Action Buttons -->

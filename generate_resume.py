@@ -12,8 +12,8 @@ def create_resume():
         pagesize=letter,
         rightMargin=36,
         leftMargin=36,
-        topMargin=36,
-        bottomMargin=36
+        topMargin=32,
+        bottomMargin=32
     )
 
     styles = getSampleStyleSheet()
@@ -23,15 +23,13 @@ def create_resume():
     ACCENT = colors.HexColor("#0284c7")  # Sky 600
     TEXT_DARK = colors.HexColor("#1e293b")
     TEXT_MUTED = colors.HexColor("#475569")
-    LINE_COLOR = colors.HexColor("#cbd5e1")
-    BG_PILL = colors.HexColor("#f1f5f9")
 
     name_style = ParagraphStyle(
         'Name',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=20,
-        leading=24,
+        fontSize=18,
+        leading=22,
         textColor=PRIMARY
     )
 
@@ -39,8 +37,8 @@ def create_resume():
         'Title',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=11,
-        leading=14,
+        fontSize=10,
+        leading=13,
         textColor=ACCENT
     )
 
@@ -48,8 +46,8 @@ def create_resume():
         'Contact',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=8.5,
-        leading=12,
+        fontSize=8.2,
+        leading=11.5,
         textColor=TEXT_MUTED
     )
 
@@ -57,18 +55,18 @@ def create_resume():
         'SectionHeading',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=11,
-        leading=15,
+        fontSize=10.5,
+        leading=14,
         textColor=PRIMARY,
-        spaceAfter=4
+        spaceAfter=3
     )
 
     item_title = ParagraphStyle(
         'ItemTitle',
         parent=styles['Normal'],
         fontName='Helvetica-Bold',
-        fontSize=9.5,
-        leading=13,
+        fontSize=9,
+        leading=12,
         textColor=TEXT_DARK
     )
 
@@ -76,8 +74,8 @@ def create_resume():
         'ItemSub',
         parent=styles['Normal'],
         fontName='Helvetica-Oblique',
-        fontSize=8.5,
-        leading=11.5,
+        fontSize=8.2,
+        leading=11,
         textColor=ACCENT
     )
 
@@ -85,8 +83,8 @@ def create_resume():
         'Body',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=8.5,
-        leading=11.5,
+        fontSize=8.2,
+        leading=11,
         textColor=TEXT_MUTED
     )
 
@@ -94,10 +92,10 @@ def create_resume():
         'Bullet',
         parent=styles['Normal'],
         fontName='Helvetica',
-        fontSize=8.5,
-        leading=11.5,
+        fontSize=8.2,
+        leading=11,
         textColor=TEXT_DARK,
-        leftIndent=10
+        leftIndent=8
     )
 
     story = []
@@ -106,143 +104,156 @@ def create_resume():
     header_data = [
         [
             Paragraph("<b>ARAVIND NAIDU YALLA</b>", name_style),
-            Paragraph("Hyderabad, India<br/>aravindyall@gmail.com", contact_style)
+            Paragraph("Hyderabad, India &bull; +91 7729804283<br/>aravindyallao@gmail.com", contact_style)
         ],
         [
-            Paragraph("AI ENGINEER &bull; GENERATIVE AI &bull; LLMs &bull; RAG", title_style),
+            Paragraph("AI SOFTWARE ENGINEER &bull; PRODUCTION AI SYSTEMS", title_style),
             Paragraph("linkedin.com/in/aravind-naidu-yalla-b50953288<br/>github.com/Aravindyalla", contact_style)
         ]
     ]
-    header_table = Table(header_data, colWidths=[4.2*inch, 3.1*inch])
+    header_table = Table(header_data, colWidths=[4.3*inch, 3.2*inch])
     header_table.setStyle(TableStyle([
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
         ('ALIGN', (1,0), (1,-1), 'RIGHT'),
         ('BOTTOMPADDING', (0,0), (-1,-1), 1),
     ]))
     story.append(header_table)
-    story.append(Spacer(1, 6))
-    story.append(HRFlowable(width="100%", thickness=1.5, color=ACCENT, spaceBefore=2, spaceAfter=8))
+    story.append(Spacer(1, 4))
+    story.append(HRFlowable(width="100%", thickness=1.5, color=ACCENT, spaceBefore=2, spaceAfter=6))
 
-    # Professional Summary
-    story.append(Paragraph("<b>PROFESSIONAL SUMMARY</b>", section_heading))
+    # Professional Profile Summary
+    story.append(Paragraph("<b>PROFESSIONAL PROFILE</b>", section_heading))
     story.append(Paragraph(
-        "AI Engineer at People Media Factory with 1 year of professional experience developing production-grade AI-powered applications. "
-        "Specialized in Python, FastAPI, Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), vector embeddings, semantic search, "
-        "and agentic architectures. Proven track record in orchestrating multi-document ingestion pipelines, vector databases (Qdrant), "
-        "and low-latency inference APIs.",
+        "AI Software Engineer with 1 year of hands-on experience building and deploying AI-powered applications and backend systems. "
+        "Experienced in Python, FastAPI, LLMs, RAG, embeddings, semantic search, Qdrant, Ollama, Hugging Face and PostgreSQL. "
+        "At People Media Factory, worked across the development lifecycle—from understanding requirements and designing solutions "
+        "to deployment, debugging and maintenance. Focused on turning real-world business requirements into practical software and AI solutions.",
         body_style
     ))
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 6))
 
     # Technical Skills
     story.append(Paragraph("<b>TECHNICAL SKILLS</b>", section_heading))
     skills_data = [
         [
-            Paragraph("<b>AI & Core LLM:</b>", item_title),
-            Paragraph("Generative AI, Large Language Models (LLMs), RAG, Agentic AI, Embeddings, Semantic Search, Ollama, Hugging Face", body_style)
+            Paragraph("<b>AI & Generative AI:</b>", item_title),
+            Paragraph("Python, LLMs, Generative AI, RAG, Prompt Engineering, Embeddings, Semantic Search, Hugging Face, Ollama", body_style)
         ],
         [
-            Paragraph("<b>Backend & APIs:</b>", item_title),
-            Paragraph("Python, FastAPI, RESTful APIs, Asynchronous Programming, Microservices Architecture", body_style)
+            Paragraph("<b>Backend:</b>", item_title),
+            Paragraph("FastAPI, REST APIs, Flask, Pydantic, SQLAlchemy, Object-Oriented Programming (OOP)", body_style)
         ],
         [
-            Paragraph("<b>Databases & Vector:</b>", item_title),
-            Paragraph("Qdrant (Vector Database), PostgreSQL, Similarity Search, Indexing & Chunking", body_style)
+            Paragraph("<b>Databases:</b>", item_title),
+            Paragraph("PostgreSQL, Qdrant (Vector Database), SQL", body_style)
         ],
         [
-            Paragraph("<b>Tools & Version Control:</b>", item_title),
-            Paragraph("Git, GitHub, Docker, Linux, OCR Text Extraction Pipelines, Prompt Engineering", body_style)
+            Paragraph("<b>Engineering & Ops:</b>", item_title),
+            Paragraph("Git, GitHub, Debugging, Troubleshooting, API Design, IIS, NSSM", body_style)
+        ],
+        [
+            Paragraph("<b>Learning / Exploring:</b>", item_title),
+            Paragraph("Agentic AI, LangChain, LangGraph, Tool Calling", body_style)
         ]
     ]
-    skills_table = Table(skills_data, colWidths=[1.8*inch, 5.5*inch])
+    skills_table = Table(skills_data, colWidths=[1.8*inch, 5.7*inch])
     skills_table.setStyle(TableStyle([
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 2),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 1.5),
     ]))
     story.append(skills_table)
-    story.append(Spacer(1, 8))
+    story.append(Spacer(1, 6))
 
     # Professional Experience
     story.append(Paragraph("<b>PROFESSIONAL EXPERIENCE</b>", section_heading))
     exp_header = [
         [
-            Paragraph("<b>People Media Factory</b> &mdash; AI Engineer", item_title),
-            Paragraph("Hyderabad, India | Oct 2025 &ndash; Present", contact_style)
+            Paragraph("<b>People Media Factory</b> &mdash; AI Developer / AI Software Engineer", item_title),
+            Paragraph("Hyderabad, India", contact_style)
+        ],
+        [
+            Paragraph("<i>May 2026 &ndash; Present &bull; Full-Time | October 2025 &ndash; April 2026 &bull; Intern</i>", item_sub),
+            Paragraph("Promoted: Intern &rarr; Full-Time", contact_style)
         ]
     ]
-    t_exp = Table(exp_header, colWidths=[4.8*inch, 2.5*inch])
+    t_exp = Table(exp_header, colWidths=[5.0*inch, 2.5*inch])
     t_exp.setStyle(TableStyle([
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
         ('ALIGN', (1,0), (1,-1), 'RIGHT'),
         ('BOTTOMPADDING', (0,0), (-1,-1), 1),
     ]))
     story.append(t_exp)
-    story.append(Paragraph("<i>Transitioned from AI Intern to Full-time AI Engineer</i>", item_sub))
     story.append(Spacer(1, 2))
-    story.append(Paragraph("&bull; Architected and deployed production-grade AI-powered applications, integrating state-of-the-art LLMs with scalable Python FastAPI backends.", bullet_style))
-    story.append(Paragraph("&bull; Engineered end-to-end Retrieval-Augmented Generation (RAG) systems incorporating chunking, OCR pipelines, and vector database indexing.", bullet_style))
-    story.append(Paragraph("&bull; Spearheaded AI experimentation, prompt tuning, and model evaluation to maximize generation relevance and factual grounding.", bullet_style))
-    story.append(Paragraph("&bull; Built resilient REST APIs and microservice endpoints supporting enterprise media and production workflows.", bullet_style))
-    story.append(Spacer(1, 8))
+    story.append(Paragraph("&bull; Built and deployed AI-powered applications using Python, FastAPI, LLMs and RAG.", bullet_style))
+    story.append(Paragraph("&bull; Developed backend services and REST APIs for production applications.", bullet_style))
+    story.append(Paragraph("&bull; Built document intelligence workflows involving OCR, embeddings, semantic search and vector databases.", bullet_style))
+    story.append(Paragraph("&bull; Integrated Hugging Face models and locally hosted LLMs using Ollama.", bullet_style))
+    story.append(Paragraph("&bull; Worked with PostgreSQL for application data and query optimization.", bullet_style))
+    story.append(Paragraph("&bull; Diagnosed production issues and optimized backend/database performance.", bullet_style))
+    story.append(Paragraph("&bull; Deployed and maintained applications using IIS and NSSM.", bullet_style))
+    story.append(Paragraph("&bull; Worked with Git/GitHub and collaborated with cross-functional teams.", bullet_style))
+    story.append(Spacer(1, 6))
 
-    # Featured Projects
+    # Projects
     story.append(Paragraph("<b>KEY PROJECTS</b>", section_heading))
 
     # Project 1
     p1_header = [
         [
-            Paragraph("<b>Enterprise RAG System</b> | <i>Document QA Intelligence</i>", item_title),
-            Paragraph("Python, FastAPI, Ollama, Qdrant, Hugging Face, PostgreSQL", contact_style)
+            Paragraph("<b>Enterprise RAG Chatbot &mdash; Document Intelligence</b>", item_title),
+            Paragraph("Python, FastAPI, RAG, Qdrant, Ollama, Hugging Face, OCR, Embeddings", contact_style)
         ]
     ]
-    t_p1 = Table(p1_header, colWidths=[4.2*inch, 3.1*inch])
+    t_p1 = Table(p1_header, colWidths=[4.5*inch, 3.0*inch])
     t_p1.setStyle(TableStyle([('VALIGN', (0,0), (-1,-1), 'TOP'), ('ALIGN', (1,0), (1,-1), 'RIGHT')]))
     story.append(t_p1)
-    story.append(Paragraph("&bull; Built an enterprise Retrieval-Augmented Generation system enabling multi-document context retrieval and high-precision question answering.", bullet_style))
-    story.append(Paragraph("&bull; Integrated OCR-based text extraction, smart document parsing, semantic chunking, and embedding generation via Hugging Face models.", bullet_style))
-    story.append(Paragraph("&bull; Deployed Qdrant vector database for sub-100ms vector similarity lookups, combined with Ollama LLMs for contextual response synthesis.", bullet_style))
-    story.append(Spacer(1, 4))
+    story.append(Paragraph("&bull; Built an end-to-end document question-answering system using Retrieval-Augmented Generation (RAG).", bullet_style))
+    story.append(Paragraph("&bull; Engineered workflow: Documents &rarr; OCR/Extraction &rarr; Text Processing &rarr; Chunking &rarr; Embeddings &rarr; Qdrant &rarr; Semantic Search &rarr; Relevant Context &rarr; LLM &rarr; Answer.", bullet_style))
+    story.append(Paragraph("&bull; Implemented multi-document ingestion, dense embeddings, Qdrant vector storage, and grounded question answering.", bullet_style))
+    story.append(Spacer(1, 3))
 
     # Project 2
     p2_header = [
         [
-            Paragraph("<b>AI Music Studio</b> | <i>Generative Audio & Music Workflows</i>", item_title),
-            Paragraph("Python, FastAPI, LLMs, Generative AI", contact_style)
+            Paragraph("<b>VFX Production Tracking System</b>", item_title),
+            Paragraph("Python, FastAPI, PostgreSQL, REST APIs, IIS, NSSM, Git", contact_style)
         ]
     ]
-    t_p2 = Table(p2_header, colWidths=[4.2*inch, 3.1*inch])
+    t_p2 = Table(p2_header, colWidths=[4.5*inch, 3.0*inch])
     t_p2.setStyle(TableStyle([('VALIGN', (0,0), (-1,-1), 'TOP'), ('ALIGN', (1,0), (1,-1), 'RIGHT')]))
     story.append(t_p2)
-    story.append(Paragraph("&bull; Developed generative music and audio pipelines orchestrating LLMs for compositional prompts, lyric creation, and audio generation models.", bullet_style))
-    story.append(Paragraph("&bull; Created responsive asynchronous FastAPI endpoints to handle streaming inference, job queueing, and multi-track audio generation tasks.", bullet_style))
-    story.append(Spacer(1, 4))
+    story.append(Paragraph("&bull; Built a production tracking platform for managing VFX artists, tasks, statuses, working activity, and timesheets.", bullet_style))
+    story.append(Paragraph("&bull; Designed role-based access control, supervisor approval workflows, and optimized PostgreSQL schema.", bullet_style))
+    story.append(Paragraph("&bull; Deployed and managed production services on Windows Server using IIS and NSSM.", bullet_style))
+    story.append(Spacer(1, 3))
 
     # Project 3
     p3_header = [
         [
-            Paragraph("<b>VFX Artist Tracking System</b> | <i>Production Operations Platform</i>", item_title),
-            Paragraph("Python, FastAPI, PostgreSQL, REST APIs", contact_style)
+            Paragraph("<b>AI Music Studio</b>", item_title),
+            Paragraph("Python, FastAPI, Generative AI, LLMs, Audio AI", contact_style)
         ]
     ]
-    t_p3 = Table(p3_header, colWidths=[4.2*inch, 3.1*inch])
+    t_p3 = Table(p3_header, colWidths=[4.5*inch, 3.0*inch])
     t_p3.setStyle(TableStyle([('VALIGN', (0,0), (-1,-1), 'TOP'), ('ALIGN', (1,0), (1,-1), 'RIGHT')]))
     story.append(t_p3)
-    story.append(Paragraph("&bull; Engineered an end-to-end production tracking platform for media operations, tracking VFX artists, shot milestones, task statuses, and working activity.", bullet_style))
-    story.append(Paragraph("&bull; Designed relational PostgreSQL database schemas with optimized query indexes and RESTful endpoints for real-time artist collaboration.", bullet_style))
-    story.append(Spacer(1, 8))
+    story.append(Paragraph("&bull; Worked on AI-powered music and audio generation workflows involving text prompts, LLM integrations and backend APIs.", bullet_style))
+    story.append(Paragraph("&bull; Orchestrated asynchronous FastAPI endpoints to handle compute-intensive audio generation models.", bullet_style))
+    story.append(Spacer(1, 6))
 
-    # Education
-    story.append(Paragraph("<b>EDUCATION</b>", section_heading))
+    # Education & Certifications
+    story.append(Paragraph("<b>EDUCATION & CERTIFICATIONS</b>", section_heading))
     edu_header = [
         [
-            Paragraph("<b>Bachelor of Technology in Computer Science & Engineering</b>", item_title),
-            Paragraph("Hyderabad, India", contact_style)
+            Paragraph("<b>B.Tech in Computer Science (Data Science)</b> &mdash; CGPA: 7.5", item_title),
+            Paragraph("2021 &ndash; 2025", contact_style)
         ]
     ]
-    t_edu = Table(edu_header, colWidths=[5.0*inch, 2.3*inch])
+    t_edu = Table(edu_header, colWidths=[5.5*inch, 2.0*inch])
     t_edu.setStyle(TableStyle([('VALIGN', (0,0), (-1,-1), 'TOP'), ('ALIGN', (1,0), (1,-1), 'RIGHT')]))
     story.append(t_edu)
-    story.append(Paragraph("Relevant Coursework: Machine Learning, Deep Learning, Natural Language Processing, Data Structures & Algorithms, Database Management Systems", body_style))
+    story.append(Paragraph("Kakinada Institute of Engineering and Technology", item_sub))
+    story.append(Paragraph("&bull; <b>Certifications:</b> Python for Data Science (Infosys Springboard) &bull; Salesforce Developer (SmartInternz)", bullet_style))
 
     doc.build(story)
     print("Resume successfully generated at:", output_path)

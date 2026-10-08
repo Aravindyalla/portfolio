@@ -23,8 +23,7 @@ const { personal } = portfolioData;
         </h2>
 
         <p class="contact-subtitle">
-          I am actively exploring AI Engineering opportunities focused on Generative AI, LLMs, RAG architectures, 
-          and production Python backends. Whether you have an open role, an AI challenge, or want to discuss LLM systems—let's connect!
+          AI Software Engineer with 1 year of hands-on experience building and deploying AI-powered applications and backend systems. Experienced in Python, FastAPI, LLMs, RAG, vector databases and PostgreSQL. Let's connect!
         </p>
 
         <!-- Availability Indicator Box -->
@@ -32,8 +31,8 @@ const { personal } = portfolioData;
           <div class="avail-left">
             <span class="status-pulse-dot"></span>
             <div>
-              <span class="avail-status">Available for Engineering Roles</span>
-              <span class="avail-loc">{personal.location} &bull; Open to Remote & On-Site</span>
+              <span class="avail-status">Available for AI Software Engineering Opportunities</span>
+              <span class="avail-loc">{personal.location} &bull; {personal.company}</span>
             </div>
           </div>
           <span class="response-time-pill">&lt; 24h Response Time</span>
@@ -106,7 +105,7 @@ const { personal } = portfolioData;
 
           <!-- 4. Email Button -->
           <a
-            href={`mailto:${personal.email}?subject=AI%20Engineering%20Opportunity%20-%20Aravind%20Naidu`}
+            href={`mailto:${personal.email}?subject=AI%20Software%20Engineering%20-%20Aravind%20Naidu`}
             class="contact-action-btn btn-email"
             id="contact-email-link"
           >
@@ -124,25 +123,43 @@ const { personal } = portfolioData;
           </a>
         </div>
 
-        <!-- 1-Click Copy Strip -->
+        <!-- Direct Contact Details Strip -->
         <div class="copy-email-strip">
           <div class="copy-box">
-            <span class="copy-label">DIRECT EMAIL:</span>
+            <span class="copy-label">EMAIL:</span>
             <code class="copy-code">{personal.email}</code>
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              data-copy={personal.email}
+              data-copy-msg="Email address copied to clipboard!"
+              aria-label="Copy Email address"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy</span>
+            </button>
           </div>
-          <button
-            type="button"
-            class="btn btn-secondary btn-sm"
-            data-copy={personal.email}
-            data-copy-msg="Email address copied to clipboard!"
-            id="contact-copy-clipboard-btn"
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-            <span>Copy Email Address</span>
-          </button>
+
+          <div class="copy-box">
+            <span class="copy-label">PHONE:</span>
+            <a href={`tel:${personal.phone}`} class="copy-code" style="text-decoration: none;">{personal.phone}</a>
+            <button
+              type="button"
+              class="btn btn-secondary btn-sm"
+              data-copy={personal.phone}
+              data-copy-msg="Phone number copied to clipboard!"
+              aria-label="Copy Phone number"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

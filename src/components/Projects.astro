@@ -14,10 +14,10 @@ const { projects, personal } = portfolioData;
         <span>Featured Engineering</span>
       </div>
       <h2 class="section-title">
-        Production <span class="text-gradient">AI Systems</span> & Architectures
+        Production <span class="text-gradient">AI Systems</span> & Projects
       </h2>
       <p class="section-subtitle">
-        Explore deep-dive technical implementations across enterprise RAG pipelines, generative audio synthesis, and high-performance backend systems.
+        Practical AI systems, document intelligence pipelines, studio operations, and backend services built for real-world impact.
       </p>
     </div>
 
@@ -40,7 +40,7 @@ const { projects, personal } = portfolioData;
                   height="405"
                 />
                 <div class="image-status-bar">
-                  <span class="img-badge-live">PRODUCTION ARCHITECTURE</span>
+                  <span class="img-badge-live">PRODUCTION SYSTEM</span>
                   <span class="img-badge-id">0{index + 1} / 0{projects.length}</span>
                 </div>
               </div>
@@ -62,7 +62,7 @@ const { projects, personal } = portfolioData;
             <div class="project-info-column">
               <div class="project-badge-row">
                 <span class="project-category-badge">{project.badge}</span>
-                <span class="project-id-tag">AI PIPELINE</span>
+                <span class="project-id-tag">PROJECT 0{index + 1}</span>
               </div>
 
               <h3 class="project-title">{project.title}</h3>
@@ -70,13 +70,35 @@ const { projects, personal } = portfolioData;
 
               <p class="project-desc">{project.description}</p>
 
+              <!-- Dedicated Visual Workflow (if applicable) -->
+              {project.visualWorkflow && (
+                <div class="project-workflow-banner">
+                  <div class="workflow-header">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-sky">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    <span class="workflow-label">END-TO-END RAG WORKFLOW PIPELINE:</span>
+                  </div>
+                  <div class="workflow-flow-strip">
+                    {project.visualWorkflow.map((node, nIdx) => (
+                      <div class="workflow-node-item">
+                        <span class="workflow-node-pill">{node}</span>
+                        {nIdx < (project.visualWorkflow?.length ?? 0) - 1 && (
+                          <span class="workflow-arrow" aria-hidden="true">&rarr;</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <!-- Key Features Checklist -->
               <div class="project-features-block">
                 <h4 class="features-heading">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-sky">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
-                  Core Engineering Capabilities:
+                  Features & Capabilities:
                 </h4>
                 <ul class="features-checklist">
                   {project.features.map((feat) => (
@@ -113,7 +135,7 @@ const { projects, personal } = portfolioData;
                       <rect x="14" y="14" width="7" height="7"></rect>
                       <rect x="3" y="14" width="7" height="7"></rect>
                     </svg>
-                    <span>View Architecture Workflow</span>
+                    <span>View Architecture Details</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon">
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
@@ -141,7 +163,7 @@ const { projects, personal } = portfolioData;
             <div class="architecture-drawer" id={`arch-${project.id}`} hidden>
               <div class="arch-inner">
                 <div class="arch-top-bar">
-                  <span class="arch-title">PIPELINE EXECUTION FLOW &mdash; {project.title.toUpperCase()}</span>
+                  <span class="arch-title">EXECUTION BREAKDOWN &mdash; {project.title.toUpperCase()}</span>
                 </div>
                 <div class="arch-steps-grid">
                   {project.architectureSteps.map((step, sIdx) => (
@@ -184,7 +206,7 @@ const { projects, personal } = portfolioData;
 
   .project-grid {
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
+    grid-template-columns: 1.05fr 1.05fr;
     gap: 36px;
     align-items: start;
   }
@@ -266,13 +288,13 @@ const { projects, personal } = portfolioData;
     text-align: center;
   }
   .metric-val {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     font-family: var(--font-mono);
     line-height: 1.2;
   }
   .metric-lbl {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     color: var(--text-muted);
     font-family: var(--font-mono);
     text-transform: uppercase;
@@ -305,13 +327,13 @@ const { projects, personal } = portfolioData;
     color: var(--text-muted);
   }
   .project-title {
-    font-size: 1.75rem;
+    font-size: 1.65rem;
     font-weight: 800;
     color: var(--text-primary);
-    line-height: 1.2;
+    line-height: 1.25;
   }
   .project-tagline {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: 600;
     color: #38bdf8;
     line-height: 1.4;
@@ -320,6 +342,55 @@ const { projects, personal } = portfolioData;
     font-size: 0.94rem;
     color: var(--text-secondary);
     line-height: 1.65;
+  }
+
+  /* Visual Workflow Pipeline Banner */
+  .project-workflow-banner {
+    background: rgba(6, 8, 13, 0.75);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .workflow-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .workflow-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--sky);
+    letter-spacing: 0.05em;
+  }
+  .workflow-flow-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .workflow-node-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .workflow-node-pill {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+  }
+  .workflow-arrow {
+    color: var(--violet);
+    font-weight: 700;
+    font-size: 0.85rem;
   }
 
   /* Features block */
