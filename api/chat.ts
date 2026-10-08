@@ -1,6 +1,6 @@
 // api/chat.ts - Secure serverless endpoint for Aravind AI portfolio assistant
 import type { IncomingMessage, ServerResponse } from 'http';
-import { AI_SYSTEM_PROMPT, getOfflineAnswer } from '../src/data/aiKnowledge';
+import { AI_SYSTEM_PROMPT, getOfflineAnswer } from '../src/data/aiKnowledge.ts';
 
 export async function processChatQuery(message: string) {
   const query = (message || '').trim();
