@@ -54,6 +54,8 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
               href={mailtoUrl}
               class="contact-action-btn btn-email"
               id="contact-email-link"
+              data-copy={personal.email}
+              data-copy-msg="Email copied: aravindyallao@gmail.com! Opening mail app..."
             >
               <div class="btn-icon-wrap">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -64,6 +66,27 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
               <div class="btn-text-wrap">
                 <span class="btn-main-label">Email Me</span>
                 <span class="btn-sub-label">{personal.email}</span>
+              </div>
+              <span class="action-arrow">&rarr;</span>
+            </a>
+
+            <!-- 1b. Compose in Gmail (Web Browser) -->
+            <a
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${personal.email}&su=${emailSubject}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-action-btn btn-gmail"
+              id="contact-gmail-link"
+            >
+              <div class="btn-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div class="btn-text-wrap">
+                <span class="btn-main-label">Open in Gmail (Web)</span>
+                <span class="btn-sub-label">Launch compose tab directly</span>
               </div>
               <span class="action-arrow">&rarr;</span>
             </a>
@@ -128,9 +151,10 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
               <span class="action-arrow">&rarr;</span>
             </a>
 
-            <!-- 5. Download Resume Button -->
+            <!-- 5. Download Resume Button (Original Verified Resume) -->
             <a
               href={personal.resumeUrl}
+              target="_blank"
               download="Aravind_Naidu_Yalla_Resume.pdf"
               class="contact-action-btn btn-resume"
               id="contact-resume-download"
@@ -144,7 +168,7 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
               </div>
               <div class="btn-text-wrap">
                 <span class="btn-main-label">Download Resume</span>
-                <span class="btn-sub-label">PDF &bull; Verified Profile</span>
+                <span class="btn-sub-label">PDF &bull; Original Resume</span>
               </div>
               <span class="action-arrow">&darr;</span>
             </a>
@@ -656,6 +680,11 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
     background: rgba(6, 182, 212, 0.2);
     border-color: var(--cyan);
     color: var(--cyan);
+  }
+  .btn-gmail:hover .btn-icon-wrap {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+    color: #f87171;
   }
   .btn-linkedin:hover .btn-icon-wrap {
     background: rgba(10, 102, 194, 0.25);

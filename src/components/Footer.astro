@@ -52,8 +52,26 @@ const currentYear = new Date().getFullYear();
           <ul class="col-links">
             <li><a href={personal.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
             <li><a href={personal.github} target="_blank" rel="noopener noreferrer">GitHub</a></li>
-            <li><a href={`mailto:${personal.email}`}>Email</a></li>
-            <li><a href={personal.resumeUrl} download="Aravind_Naidu_Yalla_Resume.pdf">Resume (PDF)</a></li>
+            <li>
+              <a
+                href="#contact"
+                data-copy={personal.email}
+                data-copy-msg="Email copied to clipboard!"
+                title="Navigate to Contact section / Copy email"
+              >
+                Email ({personal.email})
+              </a>
+            </li>
+            <li>
+              <a
+                href={personal.resumeUrl}
+                target="_blank"
+                download="Aravind_Naidu_Yalla_Resume.pdf"
+                title="Download original verified resume"
+              >
+                Resume (PDF)
+              </a>
+            </li>
           </ul>
         </div>
       </div>

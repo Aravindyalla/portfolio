@@ -47,6 +47,7 @@ const { personal, stats } = portfolioData;
         <!-- Download Resume Button -->
         <a
           href={personal.resumeUrl}
+          target="_blank"
           download="Aravind_Naidu_Yalla_Resume.pdf"
           class="btn btn-lg btn-glow"
           id="hero-resume-download"
@@ -69,12 +70,12 @@ const { personal, stats } = portfolioData;
           <span>Explore Projects</span>
         </a>
 
-        <!-- Email Button -->
+        <!-- Get in Touch Button (Scrolls smoothly to Contact Section & Form) -->
         <a
-          href={`mailto:${personal.email}`}
+          href="#contact"
           class="btn btn-lg btn-secondary"
           id="hero-email-btn"
-          title={`Email ${personal.email}`}
+          title="Get in touch with Aravind"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
