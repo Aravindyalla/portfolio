@@ -308,10 +308,16 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
                   <line x1="12" y1="16" x2="12.01" y2="16"></line>
                 </svg>
                 <div class="status-content">
-                  <p class="status-text">Something went wrong while sending your message. Please try again or contact me directly by email.</p>
-                  <a id="error-mailto-fallback" href={mailtoUrl} class="direct-email-btn">
-                    <span>Email Aravind Directly</span> &rarr;
-                  </a>
+                  <p class="status-text" id="form-error-message">Something went wrong while sending your message. Please try again or contact me directly by email.</p>
+                  <div class="error-action-row" id="error-action-row">
+                    <a id="error-gmail-fallback" href="#" target="_blank" rel="noopener noreferrer" class="direct-email-btn btn-error-gmail">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                      <span>Send via Gmail (Web)</span> &rarr;
+                    </a>
+                    <a id="error-mailto-fallback" href={mailtoUrl} class="direct-email-btn">
+                      <span>Send via Mail App</span> &rarr;
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -349,6 +355,8 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
     const successBanner = document.getElementById('form-success-banner') as HTMLElement;
     const errorBanner = document.getElementById('form-error-banner') as HTMLElement;
     const errorMailto = document.getElementById('error-mailto-fallback') as HTMLAnchorElement;
+    const errorGmail = document.getElementById('error-gmail-fallback') as HTMLAnchorElement;
+    const errorMessage = document.getElementById('form-error-message') as HTMLElement;
 
     // Field Error Elements
     const nameError = document.getElementById('name-error');
@@ -446,13 +454,21 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
             window.showToast('Message sent successfully!');
           }
         } else {
-          // Error State
+          // Error or unconfigured backend state
           if (errorBanner) {
             errorBanner.style.display = 'flex';
-            if (errorMailto) {
-              const fallbackUrl = `mailto:aravindyallao@gmail.com?subject=${encodeURIComponent('Portfolio Contact - ' + payload.subject)}&body=${encodeURIComponent('From: ' + payload.name + ' (' + payload.email + ')\n\n' + payload.message)}`;
-              errorMailto.href = fallbackUrl;
+            const emailSubj = encodeURIComponent(`Portfolio Contact: ${payload.subject}`);
+            const emailBody = encodeURIComponent(`Hi Aravind,\n\nName: ${payload.name}\nEmail: ${payload.email}\nSubject: ${payload.subject}\n\nMessage:\n${payload.message}`);
+            const fallbackGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=aravindyallao@gmail.com&su=${emailSubj}&body=${emailBody}`;
+            const fallbackMailto = `mailto:aravindyallao@gmail.com?subject=${emailSubj}&body=${emailBody}`;
+
+            if (errorGmail) errorGmail.href = data?.gmailUrl || fallbackGmail;
+            if (errorMailto) errorMailto.href = data?.mailtoUrl || fallbackMailto;
+
+            if (errorMessage) {
+              errorMessage.textContent = data?.error || 'Email service not configured yet. Click below to send directly via Gmail or Mail client with your message prefilled:';
             }
+
             errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }
         }
@@ -461,10 +477,18 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
         console.error('Contact form error:', err);
         if (errorBanner) {
           errorBanner.style.display = 'flex';
-          if (errorMailto) {
-            const fallbackUrl = `mailto:aravindyallao@gmail.com?subject=${encodeURIComponent('Portfolio Contact - ' + payload.subject)}&body=${encodeURIComponent('From: ' + payload.name + ' (' + payload.email + ')\n\n' + payload.message)}`;
-            errorMailto.href = fallbackUrl;
+          const emailSubj = encodeURIComponent(`Portfolio Contact: ${payload.subject}`);
+          const emailBody = encodeURIComponent(`Hi Aravind,\n\nName: ${payload.name}\nEmail: ${payload.email}\nSubject: ${payload.subject}\n\nMessage:\n${payload.message}`);
+          const fallbackGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=aravindyallao@gmail.com&su=${emailSubj}&body=${emailBody}`;
+          const fallbackMailto = `mailto:aravindyallao@gmail.com?subject=${emailSubj}&body=${emailBody}`;
+
+          if (errorGmail) errorGmail.href = fallbackGmail;
+          if (errorMailto) errorMailto.href = fallbackMailto;
+
+          if (errorMessage) {
+            errorMessage.textContent = 'Unable to connect to background email service. You can send this message right now with 1 click using Gmail or your email app below:';
           }
+
           errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       } finally {
@@ -852,6 +876,27 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
     transition: color 0.2s ease;
   }
   .direct-email-btn:hover {
+    color: white;
+  }
+
+  .error-action-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .btn-error-gmail {
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.15);
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    text-decoration: none;
+  }
+  .btn-error-gmail:hover {
+    background: rgba(239, 68, 68, 0.25);
     color: white;
   }
 

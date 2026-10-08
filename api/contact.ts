@@ -144,13 +144,19 @@ export async function processContactSubmission(payload: ContactPayload) {
   }
 
   // If no email dispatch service is configured in the environment
+  const emailSubj = encodeURIComponent(`Portfolio Contact: ${cleanSubject}`);
+  const emailBody = encodeURIComponent(`Hi Aravind,\n\nName: ${cleanName}\nEmail: ${cleanEmail}\nSubject: ${cleanSubject}\n\nMessage:\n${cleanMessage}`);
+  const mailtoUrl = `mailto:aravindyallao@gmail.com?subject=${emailSubj}&body=${emailBody}`;
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=aravindyallao@gmail.com&su=${emailSubj}&body=${emailBody}`;
+
   return {
     status: 503,
     data: {
       success: false,
       configured: false,
-      error: 'Something went wrong while sending your message. Please try again or contact me directly by email.',
-      mailtoUrl: `mailto:aravindyallao@gmail.com?subject=${encodeURIComponent('Portfolio Contact - ' + cleanSubject)}&body=${encodeURIComponent('From: ' + cleanName + ' (' + cleanEmail + ')\n\n' + cleanMessage)}`,
+      error: 'No email service API key (WEB3FORMS_ACCESS_KEY or RESEND_API_KEY) configured in .env yet. You can send this message directly via Gmail or Email client below:',
+      mailtoUrl,
+      gmailUrl,
     },
   };
 }
