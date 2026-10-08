@@ -3,6 +3,7 @@
 import '../styles/global.css';
 import SEO from '../components/SEO.astro';
 import NeuralBackground from '../components/NeuralBackground.astro';
+import AravindAI from '../components/AravindAI.astro';
 
 export interface Props {
   title?: string;
@@ -41,6 +42,9 @@ const { title, description, image } = Astro.props;
       </main>
       <slot name="footer" />
     </div>
+
+    <!-- Interactive Aravind AI Portfolio Assistant Widget -->
+    <AravindAI />
 
     <!-- Global copy toast notification -->
     <div id="toast" class="toast-notice" role="alert" aria-live="polite">

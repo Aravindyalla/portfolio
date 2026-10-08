@@ -3,6 +3,8 @@
 import { portfolioData } from '../data/portfolio';
 
 const { personal } = portfolioData;
+const emailSubject = encodeURIComponent('Portfolio Contact - Aravind Naidu Yalla');
+const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
 ---
 
 <section class="contact-section" id="contact">
@@ -12,7 +14,7 @@ const { personal } = portfolioData;
       <div class="contact-halo" aria-hidden="true"></div>
 
       <!-- Header Content -->
-      <div class="contact-content">
+      <div class="contact-header">
         <div class="section-tag">
           <span class="dot"></span>
           <span>Get In Touch</span>
@@ -23,7 +25,7 @@ const { personal } = portfolioData;
         </h2>
 
         <p class="contact-subtitle">
-          AI Software Engineer with 1 year of hands-on experience building and deploying AI-powered applications and backend systems. Experienced in Python, FastAPI, LLMs, RAG, vector databases and PostgreSQL. Let's connect!
+          AI Software Engineer with 1 year of hands-on experience building and deploying AI-powered applications and backend systems. Experienced in Python, FastAPI, LLMs, RAG, vector databases, and PostgreSQL. Let's connect!
         </p>
 
         <!-- Availability Indicator Box -->
@@ -37,134 +39,420 @@ const { personal } = portfolioData;
           </div>
           <span class="response-time-pill">&lt; 24h Response Time</span>
         </div>
+      </div>
 
-        <!-- 4 Primary Buttons Requested -->
-        <div class="contact-buttons-grid">
-          <!-- 1. Download Resume Button -->
-          <a
-            href={personal.resumeUrl}
-            download="Aravind_Naidu_Yalla_Resume.pdf"
-            class="contact-action-btn btn-resume"
-            id="contact-resume-download"
-          >
-            <div class="btn-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-            </div>
-            <div class="btn-text-wrap">
-              <span class="btn-main-label">Download Resume</span>
-              <span class="btn-sub-label">PDF &bull; 1-Page Summary</span>
-            </div>
-            <span class="action-arrow">&darr;</span>
-          </a>
+      <!-- Main Contact Grid: Quick Action Buttons & Direct Contact Form -->
+      <div class="contact-grid">
+        <!-- Left: Quick Direct Connect Buttons & Details -->
+        <div class="contact-left-col">
+          <h3 class="col-heading">Direct Connect</h3>
+          <p class="col-subtext">Reach out directly via email, phone, or professional networks.</p>
 
-          <!-- 2. LinkedIn Button -->
-          <a
-            href={personal.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="contact-action-btn btn-linkedin"
-            id="contact-linkedin-link"
-          >
-            <div class="btn-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-            </div>
-            <div class="btn-text-wrap">
-              <span class="btn-main-label">LinkedIn</span>
-              <span class="btn-sub-label">aravind-naidu-yalla</span>
-            </div>
-            <span class="action-arrow">&rarr;</span>
-          </a>
-
-          <!-- 3. GitHub Button -->
-          <a
-            href={personal.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="contact-action-btn btn-github"
-            id="contact-github-link"
-          >
-            <div class="btn-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-              </svg>
-            </div>
-            <div class="btn-text-wrap">
-              <span class="btn-main-label">GitHub</span>
-              <span class="btn-sub-label">@Aravindyalla</span>
-            </div>
-            <span class="action-arrow">&rarr;</span>
-          </a>
-
-          <!-- 4. Email Button -->
-          <a
-            href={`mailto:${personal.email}?subject=AI%20Software%20Engineering%20-%20Aravind%20Naidu`}
-            class="contact-action-btn btn-email"
-            id="contact-email-link"
-          >
-            <div class="btn-icon-wrap">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-            </div>
-            <div class="btn-text-wrap">
-              <span class="btn-main-label">Send Email</span>
-              <span class="btn-sub-label">{personal.email}</span>
-            </div>
-            <span class="action-arrow">&rarr;</span>
-          </a>
-        </div>
-
-        <!-- Direct Contact Details Strip -->
-        <div class="copy-email-strip">
-          <div class="copy-box">
-            <span class="copy-label">EMAIL:</span>
-            <code class="copy-code">{personal.email}</code>
-            <button
-              type="button"
-              class="btn btn-secondary btn-sm"
-              data-copy={personal.email}
-              data-copy-msg="Email address copied to clipboard!"
-              aria-label="Copy Email address"
+          <div class="contact-buttons-grid">
+            <!-- 1. Email Me Button -->
+            <a
+              href={mailtoUrl}
+              class="contact-action-btn btn-email"
+              id="contact-email-link"
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span>Copy</span>
-            </button>
+              <div class="btn-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div class="btn-text-wrap">
+                <span class="btn-main-label">Email Me</span>
+                <span class="btn-sub-label">{personal.email}</span>
+              </div>
+              <span class="action-arrow">&rarr;</span>
+            </a>
+
+            <!-- 2. LinkedIn Button -->
+            <a
+              href={personal.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-action-btn btn-linkedin"
+              id="contact-linkedin-link"
+            >
+              <div class="btn-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </div>
+              <div class="btn-text-wrap">
+                <span class="btn-main-label">LinkedIn</span>
+                <span class="btn-sub-label">aravind-naidu-yalla</span>
+              </div>
+              <span class="action-arrow">&rarr;</span>
+            </a>
+
+            <!-- 3. GitHub Button -->
+            <a
+              href={personal.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-action-btn btn-github"
+              id="contact-github-link"
+            >
+              <div class="btn-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+              </div>
+              <div class="btn-text-wrap">
+                <span class="btn-main-label">GitHub</span>
+                <span class="btn-sub-label">@Aravindyalla</span>
+              </div>
+              <span class="action-arrow">&rarr;</span>
+            </a>
+
+            <!-- 4. Phone / Call Button -->
+            <a
+              href={`tel:${personal.phone}`}
+              class="contact-action-btn btn-phone"
+              id="contact-phone-link"
+            >
+              <div class="btn-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </div>
+              <div class="btn-text-wrap">
+                <span class="btn-main-label">Call / Phone</span>
+                <span class="btn-sub-label">{personal.phone}</span>
+              </div>
+              <span class="action-arrow">&rarr;</span>
+            </a>
+
+            <!-- 5. Download Resume Button -->
+            <a
+              href={personal.resumeUrl}
+              download="Aravind_Naidu_Yalla_Resume.pdf"
+              class="contact-action-btn btn-resume"
+              id="contact-resume-download"
+            >
+              <div class="btn-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+              </div>
+              <div class="btn-text-wrap">
+                <span class="btn-main-label">Download Resume</span>
+                <span class="btn-sub-label">PDF &bull; Verified Profile</span>
+              </div>
+              <span class="action-arrow">&darr;</span>
+            </a>
           </div>
 
-          <div class="copy-box">
-            <span class="copy-label">PHONE:</span>
-            <a href={`tel:${personal.phone}`} class="copy-code" style="text-decoration: none;">{personal.phone}</a>
-            <button
-              type="button"
-              class="btn btn-secondary btn-sm"
-              data-copy={personal.phone}
-              data-copy-msg="Phone number copied to clipboard!"
-              aria-label="Copy Phone number"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span>Copy</span>
-            </button>
+          <!-- Quick Copy Details -->
+          <div class="copy-email-strip">
+            <div class="copy-box">
+              <span class="copy-label">EMAIL:</span>
+              <code class="copy-code">{personal.email}</code>
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                data-copy={personal.email}
+                data-copy-msg="Email address copied to clipboard!"
+                aria-label="Copy Email address"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+
+            <div class="copy-box">
+              <span class="copy-label">PHONE:</span>
+              <a href={`tel:${personal.phone}`} class="copy-code" style="text-decoration: none;">{personal.phone}</a>
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                data-copy={personal.phone}
+                data-copy-msg="Phone number copied to clipboard!"
+                aria-label="Copy Phone number"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Modern Contact Form -->
+        <div class="contact-right-col">
+          <div class="form-container">
+            <h3 class="col-heading">Send a Message</h3>
+            <p class="col-subtext">Fill out the form below and I will get back to you promptly.</p>
+
+            <form id="portfolio-contact-form" class="contact-form" novalidate>
+              <!-- Name Field -->
+              <div class="form-group">
+                <label for="contact-name" class="form-label">
+                  Your Name <span class="required-star">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  name="name"
+                  class="form-input"
+                  placeholder="e.g. Alex Johnson"
+                  required
+                  minlength="2"
+                  autocomplete="name"
+                />
+                <span class="form-field-error" id="name-error"></span>
+              </div>
+
+              <!-- Email Field -->
+              <div class="form-group">
+                <label for="contact-email" class="form-label">
+                  Your Email <span class="required-star">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="email"
+                  class="form-input"
+                  placeholder="e.g. alex@example.com"
+                  required
+                  autocomplete="email"
+                />
+                <span class="form-field-error" id="email-error"></span>
+              </div>
+
+              <!-- Subject Field -->
+              <div class="form-group">
+                <label for="contact-subject" class="form-label">
+                  Subject <span class="required-star">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="contact-subject"
+                  name="subject"
+                  class="form-input"
+                  placeholder="e.g. AI Engineer Opportunity / Project Inquiry"
+                  required
+                  minlength="2"
+                />
+                <span class="form-field-error" id="subject-error"></span>
+              </div>
+
+              <!-- Message Field -->
+              <div class="form-group">
+                <label for="contact-message" class="form-label">
+                  Message <span class="required-star">*</span>
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  class="form-textarea"
+                  rows="4"
+                  placeholder="Tell me about your team, project requirements, or opportunity..."
+                  required
+                  minlength="5"
+                ></textarea>
+                <span class="form-field-error" id="message-error"></span>
+              </div>
+
+              <!-- Status Feedback Banners -->
+              <div id="form-success-banner" class="form-status-banner success-banner" role="alert" style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="status-icon">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <div class="status-content">
+                  <p class="status-text">Thanks for reaching out! Your message has been sent successfully.</p>
+                </div>
+              </div>
+
+              <div id="form-error-banner" class="form-status-banner error-banner" role="alert" style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="status-icon">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <div class="status-content">
+                  <p class="status-text">Something went wrong while sending your message. Please try again or contact me directly by email.</p>
+                  <a id="error-mailto-fallback" href={mailtoUrl} class="direct-email-btn">
+                    <span>Email Aravind Directly</span> &rarr;
+                  </a>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" id="contact-submit-btn" class="form-submit-btn">
+                <span class="btn-spinner" id="btn-spinner" aria-hidden="true"></span>
+                <span class="btn-text" id="btn-text">Send Message</span>
+                <svg id="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  // Client-side Contact Form Handler with Validation and Secure Endpoint Call
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('portfolio-contact-form') as HTMLFormElement | null;
+    if (!form) return;
+
+    const nameInput = document.getElementById('contact-name') as HTMLInputElement;
+    const emailInput = document.getElementById('contact-email') as HTMLInputElement;
+    const subjectInput = document.getElementById('contact-subject') as HTMLInputElement;
+    const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement;
+    const submitBtn = document.getElementById('contact-submit-btn') as HTMLButtonElement;
+    const btnSpinner = document.getElementById('btn-spinner') as HTMLElement;
+    const btnText = document.getElementById('btn-text') as HTMLElement;
+    const btnArrow = document.getElementById('btn-arrow') as HTMLElement;
+    const successBanner = document.getElementById('form-success-banner') as HTMLElement;
+    const errorBanner = document.getElementById('form-error-banner') as HTMLElement;
+    const errorMailto = document.getElementById('error-mailto-fallback') as HTMLAnchorElement;
+
+    // Field Error Elements
+    const nameError = document.getElementById('name-error');
+    const emailError = document.getElementById('email-error');
+    const subjectError = document.getElementById('subject-error');
+    const messageError = document.getElementById('message-error');
+
+    function validateEmail(val: string): boolean {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+    }
+
+    function clearErrors() {
+      if (nameError) nameError.textContent = '';
+      if (emailError) emailError.textContent = '';
+      if (subjectError) subjectError.textContent = '';
+      if (messageError) messageError.textContent = '';
+      if (successBanner) successBanner.style.display = 'none';
+      if (errorBanner) errorBanner.style.display = 'none';
+    }
+
+    function validateForm(): boolean {
+      clearErrors();
+      let isValid = true;
+
+      const nameVal = nameInput?.value?.trim() || '';
+      const emailVal = emailInput?.value?.trim() || '';
+      const subjectVal = subjectInput?.value?.trim() || '';
+      const messageVal = messageInput?.value?.trim() || '';
+
+      if (nameVal.length < 2) {
+        if (nameError) nameError.textContent = 'Please enter your name (at least 2 characters).';
+        isValid = false;
+      }
+
+      if (!validateEmail(emailVal)) {
+        if (emailError) emailError.textContent = 'Please enter a valid email address.';
+        isValid = false;
+      }
+
+      if (subjectVal.length < 2) {
+        if (subjectError) subjectError.textContent = 'Please enter a subject.';
+        isValid = false;
+      }
+
+      if (messageVal.length < 5) {
+        if (messageError) messageError.textContent = 'Please enter your message (at least 5 characters).';
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!validateForm()) {
+        return;
+      }
+
+      const payload = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        subject: subjectInput.value.trim(),
+        message: messageInput.value.trim(),
+      };
+
+      // Set Loading State
+      submitBtn.disabled = true;
+      btnSpinner.style.display = 'inline-block';
+      btnText.textContent = 'Sending Message...';
+      if (btnArrow) btnArrow.style.display = 'none';
+      if (successBanner) successBanner.style.display = 'none';
+      if (errorBanner) errorBanner.style.display = 'none';
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await response.json().catch(() => null);
+
+        if (response.ok && data?.success) {
+          // Success State
+          form.reset();
+          if (successBanner) {
+            successBanner.style.display = 'flex';
+            successBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+          if (window.showToast) {
+            window.showToast('Message sent successfully!');
+          }
+        } else {
+          // Error State
+          if (errorBanner) {
+            errorBanner.style.display = 'flex';
+            if (errorMailto) {
+              const fallbackUrl = `mailto:aravindyallao@gmail.com?subject=${encodeURIComponent('Portfolio Contact - ' + payload.subject)}&body=${encodeURIComponent('From: ' + payload.name + ' (' + payload.email + ')\n\n' + payload.message)}`;
+              errorMailto.href = fallbackUrl;
+            }
+            errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
+      } catch (err) {
+        // Network or fetch failure
+        console.error('Contact form error:', err);
+        if (errorBanner) {
+          errorBanner.style.display = 'flex';
+          if (errorMailto) {
+            const fallbackUrl = `mailto:aravindyallao@gmail.com?subject=${encodeURIComponent('Portfolio Contact - ' + payload.subject)}&body=${encodeURIComponent('From: ' + payload.name + ' (' + payload.email + ')\n\n' + payload.message)}`;
+            errorMailto.href = fallbackUrl;
+          }
+          errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        btnSpinner.style.display = 'none';
+        btnText.textContent = 'Send Message';
+        if (btnArrow) btnArrow.style.display = 'inline-block';
+      }
+    });
+  });
+</script>
 
 <style>
   .contact-section {
@@ -175,7 +463,7 @@ const { personal } = portfolioData;
   .contact-card {
     position: relative;
     padding: 48px;
-    background: rgba(12, 16, 24, 0.9);
+    background: rgba(12, 16, 24, 0.92);
     border: 1px solid rgba(56, 189, 248, 0.25);
     border-radius: var(--radius-xl);
     overflow: hidden;
@@ -193,11 +481,11 @@ const { personal } = portfolioData;
     z-index: 0;
   }
 
-  .contact-content {
+  .contact-header {
     position: relative;
     z-index: 1;
     max-width: 860px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -233,7 +521,6 @@ const { personal } = portfolioData;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-lg);
-    margin-bottom: 36px;
   }
   .avail-left {
     display: flex;
@@ -251,9 +538,9 @@ const { personal } = portfolioData;
   }
   .avail-status {
     display: block;
+    font-weight: 600;
     font-size: 0.95rem;
-    font-weight: 700;
-    color: #f1f5f9;
+    color: var(--text-primary);
   }
   .avail-loc {
     display: block;
@@ -262,47 +549,69 @@ const { personal } = portfolioData;
     font-family: var(--font-mono);
   }
   .response-time-pill {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--sky);
-    background: rgba(56, 189, 248, 0.1);
-    border: 1px solid rgba(56, 189, 248, 0.25);
     padding: 4px 12px;
     border-radius: var(--radius-full);
+    background: rgba(16, 185, 129, 0.1);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    font-size: 0.8rem;
+    font-weight: 600;
   }
 
-  /* 4 Buttons Grid */
-  .contact-buttons-grid {
+  /* Grid Layout */
+  .contact-grid {
+    position: relative;
+    z-index: 1;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    width: 100%;
-    margin-bottom: 28px;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .col-heading {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .col-subtext {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  /* Contact Action Buttons */
+  .contact-buttons-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
   }
 
   .contact-action-btn {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 18px 22px;
+    gap: 14px;
+    padding: 14px 18px;
     border-radius: var(--radius-lg);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    text-decoration: none;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     color: var(--text-primary);
+    text-decoration: none;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    text-align: left;
   }
   .contact-action-btn:hover {
-    transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.07);
+    transform: translateY(-2px);
+    background: rgba(22, 32, 54, 0.85);
     border-color: rgba(56, 189, 248, 0.4);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
   }
 
   .btn-icon-wrap {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border-radius: var(--radius-md);
     display: flex;
     align-items: center;
@@ -319,14 +628,14 @@ const { personal } = portfolioData;
     min-width: 0;
   }
   .btn-main-label {
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--text-primary);
     line-height: 1.3;
   }
   .btn-sub-label {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.76rem;
     color: var(--text-muted);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -343,10 +652,10 @@ const { personal } = portfolioData;
   }
 
   /* Specific styles */
-  .btn-resume:hover .btn-icon-wrap {
-    background: rgba(168, 85, 247, 0.2);
-    border-color: var(--violet);
-    color: var(--violet);
+  .btn-email:hover .btn-icon-wrap {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: var(--cyan);
+    color: var(--cyan);
   }
   .btn-linkedin:hover .btn-icon-wrap {
     background: rgba(10, 102, 194, 0.25);
@@ -358,29 +667,33 @@ const { personal } = portfolioData;
     border-color: white;
     color: white;
   }
-  .btn-email:hover .btn-icon-wrap {
-    background: rgba(6, 182, 212, 0.2);
-    border-color: var(--cyan);
-    color: var(--cyan);
+  .btn-phone:hover .btn-icon-wrap {
+    background: rgba(16, 185, 129, 0.2);
+    border-color: #10b981;
+    color: #34d399;
+  }
+  .btn-resume:hover .btn-icon-wrap {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: var(--violet);
+    color: var(--violet);
   }
 
   /* Copy Strip */
   .copy-email-strip {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 14px;
+    flex-direction: column;
+    gap: 12px;
     width: 100%;
-    padding: 14px 20px;
+    padding: 16px;
     background: rgba(6, 8, 13, 0.7);
     border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
   }
   .copy-box {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 8px;
     flex-wrap: wrap;
   }
   .copy-label {
@@ -391,19 +704,193 @@ const { personal } = portfolioData;
   }
   .copy-code {
     font-family: var(--font-mono);
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     color: var(--sky);
     background: rgba(56, 189, 248, 0.08);
     padding: 3px 8px;
     border-radius: var(--radius-sm);
   }
 
-  @media (max-width: 860px) {
+  /* Form Container */
+  .form-container {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .required-star {
+    color: #f43f5e;
+  }
+
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background: rgba(10, 15, 26, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    border-color: var(--sky);
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    background: rgba(14, 21, 37, 0.95);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .form-field-error {
+    font-size: 0.78rem;
+    color: #fb7185;
+    min-height: 16px;
+    font-family: var(--font-mono);
+  }
+
+  /* Status Banners */
+  .form-status-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .success-banner {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #a7f3d0;
+  }
+
+  .error-banner {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+  }
+
+  .status-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .status-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .status-text {
+    margin: 0;
+  }
+
+  .direct-email-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--sky);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+  }
+  .direct-email-btn:hover {
+    color: white;
+  }
+
+  /* Submit Button */
+  .form-submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--sky), var(--violet));
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 18px rgba(56, 189, 248, 0.3);
+  }
+
+  .form-submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(56, 189, 248, 0.45);
+    filter: brightness(1.1);
+  }
+
+  .form-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(0.9);
+    }
+  }
+
+  @media (max-width: 900px) {
     .contact-card {
       padding: 32px 20px;
     }
-    .contact-buttons-grid {
+    .contact-grid {
       grid-template-columns: 1fr;
+      gap: 32px;
     }
     .availability-box {
       flex-direction: column;

@@ -1,0 +1,895 @@
+---
+// AravindAI.astro - Professional AI Portfolio Assistant ("Aravind AI")
+---
+
+<div id="aravind-ai-widget" class="ai-widget-wrapper">
+  <!-- 1. Floating Launch Button -->
+  <button
+    id="ai-launch-btn"
+    class="ai-floating-btn"
+    type="button"
+    aria-label="Open Aravind AI Chatbot"
+    aria-expanded="false"
+    aria-controls="ai-chat-window"
+  >
+    <div class="ai-btn-glow" aria-hidden="true"></div>
+    <div class="ai-btn-icon-wrap">
+      <!-- Neural / Sparkle AI Icon -->
+      <svg class="ai-icon-sparkle" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"></path>
+      </svg>
+      <span class="ai-btn-pulse-dot" aria-hidden="true"></span>
+    </div>
+    <span class="ai-btn-label">Ask Aravind AI</span>
+  </button>
+
+  <!-- 2. Chat Window Container -->
+  <div
+    id="ai-chat-window"
+    class="ai-chat-card"
+    role="dialog"
+    aria-labelledby="ai-chat-title"
+    aria-describedby="ai-chat-subtitle"
+    style="display: none;"
+  >
+    <!-- Chat Header -->
+    <header class="ai-chat-header">
+      <div class="ai-header-info">
+        <div class="ai-avatar-badge" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a8 8 0 0 0-8 8c0 3.3 2 6.2 5 7.4V20a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2.6c3-1.2 5-4.1 5-7.4a8 8 0 0 0-8-8z"></path>
+            <line x1="9" y1="10" x2="9.01" y2="10"></line>
+            <line x1="15" y1="10" x2="15.01" y2="10"></line>
+          </svg>
+          <span class="ai-status-online" title="Online"></span>
+        </div>
+        <div>
+          <h2 id="ai-chat-title" class="ai-header-name">Aravind AI</h2>
+          <p id="ai-chat-subtitle" class="ai-header-role">Ask me anything about Aravind</p>
+        </div>
+      </div>
+
+      <div class="ai-header-actions">
+        <!-- Clear Chat Button -->
+        <button
+          id="ai-clear-btn"
+          class="ai-header-btn"
+          type="button"
+          title="Clear Conversation"
+          aria-label="Clear Chat History"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+        </button>
+
+        <!-- Close Chat Button -->
+        <button
+          id="ai-close-btn"
+          class="ai-header-btn"
+          type="button"
+          title="Close Chat"
+          aria-label="Close Chat"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Chat Messages Scroll Area -->
+    <div id="ai-messages-list" class="ai-messages-stream" role="log" aria-live="polite">
+      <!-- Welcome Message -->
+      <div class="ai-message-row ai-row-assistant">
+        <div class="ai-bubble-avatar">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <div class="ai-bubble ai-bubble-assistant">
+          <p>Hi! I'm <strong>Aravind AI</strong>, your interactive portfolio assistant. I can answer questions about Aravind's work at People Media Factory, his Enterprise RAG chatbot, skills, projects, and contact info.</p>
+          <p class="ai-bubble-footnote">Pick a starter question below or type your own question!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Starter Quick Questions Chips -->
+    <div id="ai-starter-chips" class="ai-starter-chips">
+      <span class="ai-chips-label">Suggested:</span>
+      <div class="ai-chips-scroll">
+        <button type="button" class="ai-chip-btn" data-query="What does Aravind do?">
+          What does Aravind do?
+        </button>
+        <button type="button" class="ai-chip-btn" data-query="What are his main AI skills?">
+          What are his main AI skills?
+        </button>
+        <button type="button" class="ai-chip-btn" data-query="Tell me about his RAG project.">
+          Tell me about his RAG project
+        </button>
+        <button type="button" class="ai-chip-btn" data-query="How can I contact him?">
+          How can I contact him?
+        </button>
+        <button type="button" class="ai-chip-btn" data-query="What technologies is he currently learning?">
+          What is he learning?
+        </button>
+        <button type="button" class="ai-chip-btn" data-query="Show me Aravind's resume">
+          Download Resume
+        </button>
+      </div>
+    </div>
+
+    <!-- Typing Indicator (Hidden by default) -->
+    <div id="ai-typing-indicator" class="ai-typing-wrap" style="display: none;" aria-hidden="true">
+      <div class="ai-typing-avatar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+        </svg>
+      </div>
+      <div class="ai-typing-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <span class="ai-typing-label">Aravind AI is thinking...</span>
+    </div>
+
+    <!-- Chat Input Area -->
+    <form id="ai-input-form" class="ai-input-bar">
+      <textarea
+        id="ai-user-input"
+        class="ai-textarea"
+        rows="1"
+        placeholder="Ask about Aravind's experience, RAG, skills..."
+        aria-label="Ask Aravind AI a question"
+        maxlength="500"
+      ></textarea>
+      <button
+        id="ai-send-btn"
+        class="ai-send-btn"
+        type="submit"
+        aria-label="Send Message"
+        disabled
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+    <div class="ai-input-footer">
+      <span>Press Enter to send &bull; Shift+Enter for new line</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { getOfflineAnswer } from '../data/aiKnowledge';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const launchBtn = document.getElementById('ai-launch-btn') as HTMLButtonElement | null;
+    const chatWindow = document.getElementById('ai-chat-window') as HTMLElement | null;
+    const closeBtn = document.getElementById('ai-close-btn') as HTMLButtonElement | null;
+    const clearBtn = document.getElementById('ai-clear-btn') as HTMLButtonElement | null;
+    const messagesList = document.getElementById('ai-messages-list') as HTMLElement | null;
+    const typingIndicator = document.getElementById('ai-typing-indicator') as HTMLElement | null;
+    const inputForm = document.getElementById('ai-input-form') as HTMLFormElement | null;
+    const userInput = document.getElementById('ai-user-input') as HTMLTextAreaElement | null;
+    const sendBtn = document.getElementById('ai-send-btn') as HTMLButtonElement | null;
+    const starterChips = document.getElementById('ai-starter-chips') as HTMLElement | null;
+
+    if (!launchBtn || !chatWindow || !inputForm || !userInput || !sendBtn || !messagesList) {
+      return;
+    }
+
+    let isOpen = false;
+    let isThinking = false;
+
+    // Toggle Chat Window
+    function toggleChat(open?: boolean) {
+      isOpen = typeof open === 'boolean' ? open : !isOpen;
+      chatWindow.style.display = isOpen ? 'flex' : 'none';
+      launchBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+      if (isOpen) {
+        userInput.focus();
+        scrollToBottom();
+      }
+    }
+
+    launchBtn.addEventListener('click', () => toggleChat());
+    closeBtn?.addEventListener('click', () => toggleChat(false));
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        toggleChat(false);
+      }
+    });
+
+    // Auto-scroll messages container
+    function scrollToBottom() {
+      if (messagesList) {
+        messagesList.scrollTop = messagesList.scrollHeight;
+      }
+    }
+
+    // Auto-expand textarea
+    userInput.addEventListener('input', () => {
+      userInput.style.height = 'auto';
+      userInput.style.height = `${Math.min(userInput.scrollHeight, 120)}px`;
+      sendBtn.disabled = userInput.value.trim().length === 0 || isThinking;
+    });
+
+    // Keyboard Send (Enter = Send, Shift+Enter = newline)
+    userInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        if (!sendBtn.disabled && !isThinking) {
+          submitQuestion(userInput.value.trim());
+        }
+      }
+    });
+
+    // Starter question chips
+    starterChips?.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest('[data-query]') as HTMLElement | null;
+      if (!target) return;
+      const query = target.getAttribute('data-query');
+      if (query && !isThinking) {
+        submitQuestion(query);
+      }
+    });
+
+    // Clear Chat
+    clearBtn?.addEventListener('click', () => {
+      messagesList.innerHTML = `
+        <div class="ai-message-row ai-row-assistant">
+          <div class="ai-bubble-avatar">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <div class="ai-bubble ai-bubble-assistant">
+            <p>Chat cleared! What would you like to know about Aravind Naidu Yalla?</p>
+          </div>
+        </div>
+      `;
+      if (starterChips) starterChips.style.display = 'flex';
+      scrollToBottom();
+    });
+
+    // Append Message to UI
+    function appendMessage(role: 'user' | 'assistant', text: string, action?: any) {
+      const row = document.createElement('div');
+      row.className = `ai-message-row ${role === 'user' ? 'ai-row-user' : 'ai-row-assistant'}`;
+
+      if (role === 'assistant') {
+        const avatar = document.createElement('div');
+        avatar.className = 'ai-bubble-avatar';
+        avatar.innerHTML = `
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        `;
+        row.appendChild(avatar);
+      }
+
+      const bubble = document.createElement('div');
+      bubble.className = `ai-bubble ${role === 'user' ? 'ai-bubble-user' : 'ai-bubble-assistant'}`;
+
+      // Convert line breaks and simple markdown
+      const formattedText = formatAnswer(text);
+      bubble.innerHTML = formattedText;
+
+      // Append action button if present (Resume, LinkedIn, GitHub, Email)
+      if (action && action.url && action.label) {
+        const actionWrap = document.createElement('div');
+        actionWrap.className = 'ai-action-btn-wrap';
+
+        const actionBtn = document.createElement('a');
+        actionBtn.href = action.url;
+        actionBtn.className = 'ai-action-pill';
+        actionBtn.target = action.url.startsWith('mailto:') ? '_self' : '_blank';
+        actionBtn.rel = 'noopener noreferrer';
+
+        let iconSvg = '';
+        if (action.type === 'resume') {
+          actionBtn.setAttribute('download', 'Aravind_Naidu_Yalla_Resume.pdf');
+          iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
+        } else if (action.type === 'linkedin') {
+          iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`;
+        } else if (action.type === 'github') {
+          iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>`;
+        } else {
+          iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>`;
+        }
+
+        actionBtn.innerHTML = `${iconSvg} <span>${action.label}</span> &rarr;`;
+        actionWrap.appendChild(actionBtn);
+        bubble.appendChild(actionWrap);
+      }
+
+      row.appendChild(bubble);
+      messagesList.appendChild(row);
+      scrollToBottom();
+    }
+
+    function formatAnswer(str: string): string {
+      // Escape HTML
+      let clean = str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      // Bold markdown: **text**
+      clean = clean.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+      // Convert bullet points and lines
+      const lines = clean.split('\n');
+      const formattedLines = lines.map((l) => {
+        const trimmed = l.trim();
+        if (trimmed.startsWith('•') || trimmed.startsWith('-') || trimmed.startsWith('*')) {
+          return `<div class="ai-bullet">${trimmed}</div>`;
+        }
+        if (trimmed === '') {
+          return '<div class="ai-spacer"></div>';
+        }
+        return `<p>${trimmed}</p>`;
+      });
+
+      return formattedLines.join('');
+    }
+
+    // Submit question flow
+    async function submitQuestion(question: string) {
+      if (!question || isThinking) return;
+
+      appendMessage('user', question);
+      userInput.value = '';
+      userInput.style.height = 'auto';
+      sendBtn.disabled = true;
+
+      // Show typing indicator
+      isThinking = true;
+      if (typingIndicator) {
+        typingIndicator.style.display = 'flex';
+        scrollToBottom();
+      }
+
+      try {
+        // Attempt POST to secure serverless endpoint /api/chat
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify({ message: question }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.answer) {
+            appendMessage('assistant', data.answer, data.action);
+            return;
+          }
+        }
+
+        // If serverless endpoint returned error or fallback mode
+        const offline = getOfflineAnswer(question);
+        appendMessage('assistant', offline.text, offline.action);
+      } catch (err) {
+        // Pure static or offline fallback: zero downtime, 100% reliable
+        const offline = getOfflineAnswer(question);
+        appendMessage('assistant', offline.text, offline.action);
+      } finally {
+        isThinking = false;
+        if (typingIndicator) typingIndicator.style.display = 'none';
+        sendBtn.disabled = userInput.value.trim().length === 0;
+        userInput.focus();
+        scrollToBottom();
+      }
+    }
+
+    inputForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = userInput.value.trim();
+      if (val && !isThinking) {
+        submitQuestion(val);
+      }
+    });
+  });
+</script>
+
+<style>
+  .ai-widget-wrapper {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  }
+
+  /* 1. Floating Launch Button */
+  .ai-floating-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #090d16 0%, #111827 100%);
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    border-radius: var(--radius-full, 9999px);
+    color: var(--text-primary, #f8fafc);
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.25);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ai-floating-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(56, 189, 248, 0.8);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 30px rgba(56, 189, 248, 0.45);
+  }
+
+  .ai-btn-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--radius-full, 9999px);
+    background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.3), transparent 70%);
+    filter: blur(8px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .ai-btn-icon-wrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #38bdf8;
+  }
+
+  .ai-btn-pulse-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 7px;
+    height: 7px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #10b981;
+    animation: aiPulse 1.8s infinite;
+  }
+
+  .ai-btn-label {
+    position: relative;
+    z-index: 1;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* 2. Chat Window Modal */
+  .ai-chat-card {
+    position: absolute;
+    bottom: 64px;
+    right: 0;
+    width: 380px;
+    max-width: calc(100vw - 32px);
+    height: 540px;
+    max-height: calc(100vh - 100px);
+    background: rgba(11, 15, 25, 0.96);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: aiSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10000;
+  }
+
+  @keyframes aiSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Chat Header */
+  .ai-chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: rgba(15, 23, 42, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .ai-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ai-avatar-badge {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.2));
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #38bdf8;
+  }
+
+  .ai-status-online {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #10b981;
+    border: 2px solid #0f172a;
+    box-shadow: 0 0 6px #10b981;
+  }
+
+  .ai-header-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .ai-header-role {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    margin: 0;
+    font-family: var(--font-mono, monospace);
+  }
+
+  .ai-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ai-header-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #94a3b8;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .ai-header-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  /* Messages Area */
+  .ai-messages-stream {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(56, 189, 248, 0.2) transparent;
+  }
+
+  .ai-message-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 90%;
+  }
+
+  .ai-row-user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+  }
+
+  .ai-row-assistant {
+    align-self: flex-start;
+  }
+
+  .ai-bubble-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    color: #38bdf8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .ai-bubble {
+    padding: 12px 14px;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    word-break: break-word;
+  }
+
+  .ai-bubble-user {
+    background: linear-gradient(135deg, #0284c7, #2563eb);
+    color: #ffffff;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+  }
+
+  .ai-bubble-assistant {
+    background: rgba(22, 30, 48, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+    border-bottom-left-radius: 4px;
+  }
+
+  .ai-bubble-assistant p {
+    margin: 0 0 6px 0;
+  }
+  .ai-bubble-assistant p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-bubble-footnote {
+    font-size: 0.76rem;
+    color: #94a3b8;
+    margin-top: 6px;
+  }
+
+  .ai-bullet {
+    margin-left: 4px;
+    margin-bottom: 4px;
+    color: #cbd5e1;
+    font-size: 0.85rem;
+  }
+
+  .ai-spacer {
+    height: 6px;
+  }
+
+  /* Action Buttons inside Assistant Bubble */
+  .ai-action-btn-wrap {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .ai-action-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-radius: 20px;
+    color: #38bdf8;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .ai-action-pill:hover {
+    background: rgba(56, 189, 248, 0.25);
+    border-color: #38bdf8;
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  /* Starter Chips */
+  .ai-starter-chips {
+    padding: 8px 14px;
+    background: rgba(15, 23, 42, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .ai-chips-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    font-family: var(--font-mono, monospace);
+  }
+
+  .ai-chips-scroll {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .ai-chips-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-chip-btn {
+    white-space: nowrap;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #cbd5e1;
+    font-size: 0.74rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .ai-chip-btn:hover {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.4);
+    color: #38bdf8;
+  }
+
+  /* Typing Indicator */
+  .ai-typing-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(15, 23, 42, 0.4);
+  }
+
+  .ai-typing-avatar {
+    color: #38bdf8;
+  }
+
+  .ai-typing-dots {
+    display: flex;
+    gap: 4px;
+  }
+
+  .ai-typing-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #38bdf8;
+    animation: aiBounce 1.2s infinite ease-in-out;
+  }
+
+  .ai-typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .ai-typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  .ai-typing-label {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    font-family: var(--font-mono, monospace);
+  }
+
+  @keyframes aiBounce {
+    0%, 80%, 100% {
+      transform: scale(0.6);
+      opacity: 0.4;
+    }
+    40% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Input Bar */
+  .ai-input-bar {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(15, 23, 42, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .ai-textarea {
+    flex: 1;
+    background: rgba(22, 30, 48, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.86rem;
+    padding: 8px 12px;
+    outline: none;
+    resize: none;
+    max-height: 100px;
+    line-height: 1.4;
+  }
+
+  .ai-textarea:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+  }
+
+  .ai-send-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #0284c7, #2563eb);
+    border: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .ai-send-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+  }
+
+  .ai-send-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .ai-input-footer {
+    padding: 4px 14px 8px 14px;
+    background: rgba(15, 23, 42, 0.95);
+    text-align: center;
+    font-size: 0.65rem;
+    color: #64748b;
+    font-family: var(--font-mono, monospace);
+  }
+
+  @keyframes aiPulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(0.9);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ai-widget-wrapper {
+      bottom: 16px;
+      right: 16px;
+    }
+    .ai-chat-card {
+      width: calc(100vw - 32px);
+      height: 480px;
+      bottom: 60px;
+    }
+  }
+</style>
