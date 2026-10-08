@@ -46,16 +46,17 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
         <!-- Left: Quick Direct Connect Buttons & Details -->
         <div class="contact-left-col">
           <h3 class="col-heading">Direct Connect</h3>
-          <p class="col-subtext">Reach out directly via email, phone, or professional networks.</p>
+          <p class="col-subtext">Reach out directly via email or professional networks.</p>
 
           <div class="contact-buttons-grid">
-            <!-- 1. Email Me Button -->
-            <a
-              href={mailtoUrl}
+            <!-- 1. Email Button (Click to copy email address) -->
+            <button
+              type="button"
               class="contact-action-btn btn-email"
-              id="contact-email-link"
+              id="contact-email-btn"
               data-copy={personal.email}
-              data-copy-msg="Email copied: aravindyallao@gmail.com! Opening mail app..."
+              data-copy-msg="Email copied: aravindyallao@gmail.com"
+              aria-label="Copy Email address: aravindyallao@gmail.com"
             >
               <div class="btn-icon-wrap">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -67,29 +68,11 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
                 <span class="btn-main-label">Email Me</span>
                 <span class="btn-sub-label">{personal.email}</span>
               </div>
-              <span class="action-arrow">&rarr;</span>
-            </a>
-
-            <!-- 1b. Compose in Gmail (Web Browser) -->
-            <a
-              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${personal.email}&su=${emailSubject}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact-action-btn btn-gmail"
-              id="contact-gmail-link"
-            >
-              <div class="btn-icon-wrap">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-              </div>
-              <div class="btn-text-wrap">
-                <span class="btn-main-label">Open in Gmail (Web)</span>
-                <span class="btn-sub-label">Launch compose tab directly</span>
-              </div>
-              <span class="action-arrow">&rarr;</span>
-            </a>
+              <span class="copy-badge-pill" id="email-btn-copy-status">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span>Copy</span>
+              </span>
+            </button>
 
             <!-- 2. LinkedIn Button -->
             <a
@@ -133,25 +116,7 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
               <span class="action-arrow">&rarr;</span>
             </a>
 
-            <!-- 4. Phone / Call Button -->
-            <a
-              href={`tel:${personal.phone}`}
-              class="contact-action-btn btn-phone"
-              id="contact-phone-link"
-            >
-              <div class="btn-icon-wrap">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                </svg>
-              </div>
-              <div class="btn-text-wrap">
-                <span class="btn-main-label">Call / Phone</span>
-                <span class="btn-sub-label">{personal.phone}</span>
-              </div>
-              <span class="action-arrow">&rarr;</span>
-            </a>
-
-            <!-- 5. Download Resume Button (Original Verified Resume) -->
+            <!-- 4. Download Resume Button (Original Verified Resume) -->
             <a
               href={personal.resumeUrl}
               target="_blank"
@@ -185,24 +150,6 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
                 data-copy={personal.email}
                 data-copy-msg="Email address copied to clipboard!"
                 aria-label="Copy Email address"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                <span>Copy</span>
-              </button>
-            </div>
-
-            <div class="copy-box">
-              <span class="copy-label">PHONE:</span>
-              <a href={`tel:${personal.phone}`} class="copy-code" style="text-decoration: none;">{personal.phone}</a>
-              <button
-                type="button"
-                class="btn btn-secondary btn-sm"
-                data-copy={personal.phone}
-                data-copy-msg="Phone number copied to clipboard!"
-                aria-label="Copy Phone number"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -308,15 +255,17 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
                   <line x1="12" y1="16" x2="12.01" y2="16"></line>
                 </svg>
                 <div class="status-content">
-                  <p class="status-text" id="form-error-message">Something went wrong while sending your message. Please try again or contact me directly by email.</p>
+                  <p class="status-text" id="form-error-message">Something went wrong while sending your message. Please try again or copy my email directly:</p>
                   <div class="error-action-row" id="error-action-row">
-                    <a id="error-gmail-fallback" href="#" target="_blank" rel="noopener noreferrer" class="direct-email-btn btn-error-gmail">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                      <span>Send via Gmail (Web)</span> &rarr;
-                    </a>
-                    <a id="error-mailto-fallback" href={mailtoUrl} class="direct-email-btn">
-                      <span>Send via Mail App</span> &rarr;
-                    </a>
+                    <button
+                      type="button"
+                      class="direct-email-btn"
+                      data-copy={personal.email}
+                      data-copy-msg="Email copied: aravindyallao@gmail.com"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                      <span>Copy Email ({personal.email})</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -354,9 +303,32 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
     const btnArrow = document.getElementById('btn-arrow') as HTMLElement;
     const successBanner = document.getElementById('form-success-banner') as HTMLElement;
     const errorBanner = document.getElementById('form-error-banner') as HTMLElement;
-    const errorMailto = document.getElementById('error-mailto-fallback') as HTMLAnchorElement;
-    const errorGmail = document.getElementById('error-gmail-fallback') as HTMLAnchorElement;
     const errorMessage = document.getElementById('form-error-message') as HTMLElement;
+
+    // Direct Email Me Card Copy Handler
+    const emailBtn = document.getElementById('contact-email-btn');
+    const copyStatus = document.getElementById('email-btn-copy-status');
+    if (emailBtn && copyStatus) {
+      emailBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText('aravindyallao@gmail.com').then(() => {
+          copyStatus.classList.add('copied');
+          copyStatus.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Copied!</span>
+          `;
+          if ((window as any).showToast) {
+            (window as any).showToast('Email address copied: aravindyallao@gmail.com');
+          }
+          setTimeout(() => {
+            copyStatus.classList.remove('copied');
+            copyStatus.innerHTML = `
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy</span>
+            `;
+          }, 2500);
+        });
+      });
+    }
 
     // Field Error Elements
     const nameError = document.getElementById('name-error');
@@ -464,18 +436,9 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
           // Error or unconfigured backend state
           if (errorBanner) {
             errorBanner.style.display = 'flex';
-            const emailSubj = encodeURIComponent(`Portfolio Contact: ${payload.subject}`);
-            const emailBody = encodeURIComponent(`Hi Aravind,\n\nName: ${payload.name}\nEmail: ${payload.email}\nSubject: ${payload.subject}\n\nMessage:\n${payload.message}`);
-            const fallbackGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=aravindyallao@gmail.com&su=${emailSubj}&body=${emailBody}`;
-            const fallbackMailto = `mailto:aravindyallao@gmail.com?subject=${emailSubj}&body=${emailBody}`;
-
-            if (errorGmail) errorGmail.href = data?.gmailUrl || fallbackGmail;
-            if (errorMailto) errorMailto.href = data?.mailtoUrl || fallbackMailto;
-
             if (errorMessage) {
-              errorMessage.textContent = data?.error || 'Email service not configured yet. Click below to send directly via Gmail or Mail client with your message prefilled:';
+              errorMessage.textContent = data?.error || 'Something went wrong while sending your message. Please copy my email directly below:';
             }
-
             errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }
         }
@@ -484,18 +447,9 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
         console.error('Contact form error:', err);
         if (errorBanner) {
           errorBanner.style.display = 'flex';
-          const emailSubj = encodeURIComponent(`Portfolio Contact: ${payload.subject}`);
-          const emailBody = encodeURIComponent(`Hi Aravind,\n\nName: ${payload.name}\nEmail: ${payload.email}\nSubject: ${payload.subject}\n\nMessage:\n${payload.message}`);
-          const fallbackGmail = `https://mail.google.com/mail/?view=cm&fs=1&to=aravindyallao@gmail.com&su=${emailSubj}&body=${emailBody}`;
-          const fallbackMailto = `mailto:aravindyallao@gmail.com?subject=${emailSubj}&body=${emailBody}`;
-
-          if (errorGmail) errorGmail.href = fallbackGmail;
-          if (errorMailto) errorMailto.href = fallbackMailto;
-
           if (errorMessage) {
-            errorMessage.textContent = 'Unable to connect to background email service. You can send this message right now with 1 click using Gmail or your email app below:';
+            errorMessage.textContent = 'Unable to send message right now. Please copy my email directly below:';
           }
-
           errorBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       } finally {
@@ -650,11 +604,15 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
     align-items: center;
     gap: 14px;
     padding: 14px 18px;
+    width: 100%;
     border-radius: var(--radius-lg);
     background: rgba(15, 23, 42, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: var(--text-primary);
     text-decoration: none;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .contact-action-btn:hover {
@@ -662,6 +620,33 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
     background: rgba(22, 32, 54, 0.85);
     border-color: rgba(56, 189, 248, 0.4);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
+  }
+
+  .copy-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #38bdf8;
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .contact-action-btn:hover .copy-badge-pill {
+    background: rgba(56, 189, 248, 0.25);
+    border-color: #38bdf8;
+    color: #ffffff;
+  }
+  .copy-badge-pill.copied {
+    background: rgba(16, 185, 129, 0.2) !important;
+    border-color: #10b981 !important;
+    color: #34d399 !important;
   }
 
   .btn-icon-wrap {
@@ -712,11 +697,6 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
     border-color: var(--cyan);
     color: var(--cyan);
   }
-  .btn-gmail:hover .btn-icon-wrap {
-    background: rgba(239, 68, 68, 0.2);
-    border-color: #ef4444;
-    color: #f87171;
-  }
   .btn-linkedin:hover .btn-icon-wrap {
     background: rgba(10, 102, 194, 0.25);
     border-color: #0a66c2;
@@ -726,11 +706,6 @@ const mailtoUrl = `mailto:${personal.email}?subject=${emailSubject}`;
     background: rgba(255, 255, 255, 0.15);
     border-color: white;
     color: white;
-  }
-  .btn-phone:hover .btn-icon-wrap {
-    background: rgba(16, 185, 129, 0.2);
-    border-color: #10b981;
-    color: #34d399;
   }
   .btn-resume:hover .btn-icon-wrap {
     background: rgba(168, 85, 247, 0.2);

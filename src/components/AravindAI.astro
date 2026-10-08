@@ -296,7 +296,30 @@
           (action.url && action.url.startsWith('#contact'));
 
         if (isContactOrEmail) {
-          // 1. Primary: Scroll to Contact Form on page (100% works, interactive, fills form)
+          // 1. Copy Email button (click to copy email)
+          const copyBtn = document.createElement('button');
+          copyBtn.type = 'button';
+          copyBtn.className = 'ai-action-pill ai-action-copy';
+          copyBtn.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>Copy Email (aravindyallao@gmail.com)</span>
+          `;
+          copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText('aravindyallao@gmail.com').then(() => {
+              if ((window as any).showToast) {
+                (window as any).showToast('Email copied: aravindyallao@gmail.com');
+              }
+              const label = copyBtn.querySelector('span');
+              if (label) {
+                const prev = label.textContent;
+                label.textContent = 'Copied to clipboard!';
+                setTimeout(() => { label.textContent = prev; }, 2000);
+              }
+            });
+          });
+          actionWrap.appendChild(copyBtn);
+
+          // 2. Scroll to Contact Form on page
           const contactBtn = document.createElement('a');
           contactBtn.href = '#contact';
           contactBtn.className = 'ai-action-pill ai-action-contact';
@@ -315,40 +338,8 @@
                 nameInput?.focus();
               }, 450);
             }
-            if ((window as any).showToast) {
-              (window as any).showToast('Navigating to Contact Form... (Email: aravindyallao@gmail.com)');
-            }
           });
           actionWrap.appendChild(contactBtn);
-
-          // 2. Open Gmail (Web) directly in browser (works everywhere, zero desktop client required)
-          const gmailBtn = document.createElement('a');
-          gmailBtn.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=aravindyallao@gmail.com&su=Portfolio%20Contact%20-%20Aravind%20Naidu%20Yalla';
-          gmailBtn.target = '_blank';
-          gmailBtn.rel = 'noopener noreferrer';
-          gmailBtn.className = 'ai-action-pill ai-action-gmail';
-          gmailBtn.innerHTML = `
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            <span>Open in Gmail (Web)</span> &rarr;
-          `;
-          actionWrap.appendChild(gmailBtn);
-
-          // 3. Copy Email button
-          const copyBtn = document.createElement('button');
-          copyBtn.type = 'button';
-          copyBtn.className = 'ai-action-pill ai-action-copy';
-          copyBtn.innerHTML = `
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-            <span>Copy Email</span>
-          `;
-          copyBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText('aravindyallao@gmail.com').then(() => {
-              if ((window as any).showToast) {
-                (window as any).showToast('Email copied: aravindyallao@gmail.com');
-              }
-            });
-          });
-          actionWrap.appendChild(copyBtn);
         } else {
           // Standard Actions: Resume, LinkedIn, GitHub, Anchors
           const actionBtn = document.createElement('a');
@@ -799,16 +790,6 @@
     color: #ffffff;
   }
 
-  .ai-action-gmail {
-    background: rgba(239, 68, 68, 0.12);
-    border-color: rgba(239, 68, 68, 0.4);
-    color: #f87171;
-  }
-  .ai-action-gmail:hover {
-    background: rgba(239, 68, 68, 0.25);
-    border-color: #f87171;
-    color: #ffffff;
-  }
 
   .ai-action-copy {
     background: rgba(148, 163, 184, 0.12);
