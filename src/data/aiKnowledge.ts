@@ -253,14 +253,18 @@ export function getOfflineAnswer(query: string): AgentAnswer {
     q.includes("gcp") ||
     q.includes("cloud certification") ||
     q.includes("tensorflow") ||
-    q.includes("pytorch")
+    q.includes("pytorch") ||
+    q.includes("age") ||
+    q.includes("how old") ||
+    q.includes("date of birth") ||
+    q.includes("dob")
   ) {
     return {
       text: "I don't have that information in Aravind's portfolio. You can contact him directly at aravindyallao@gmail.com.",
       action: {
-        type: "email",
+        type: "contact",
         label: "Contact Aravind Directly",
-        url: `mailto:${AI_KNOWLEDGE_BASE.contact.email}?subject=Portfolio%20Contact%20-%20Aravind%20Naidu%20Yalla`,
+        url: "#contact",
       },
     };
   }
@@ -568,9 +572,9 @@ export function getOfflineAnswer(query: string): AgentAnswer {
     return {
       text: "You can reach Aravind directly via:\n• Email: aravindyallao@gmail.com\n• Phone: +91 7729804283\n• LinkedIn: linkedin.com/in/aravind-naidu-yalla-b50953288\n• GitHub: github.com/Aravindyalla",
       action: {
-        type: "email",
-        label: "Send Email (aravindyallao@gmail.com)",
-        url: `mailto:${AI_KNOWLEDGE_BASE.contact.email}?subject=Portfolio%20Contact%20-%20Aravind%20Naidu%20Yalla`,
+        type: "contact",
+        label: "Go to Contact Form",
+        url: "#contact",
       },
     };
   }
@@ -579,9 +583,9 @@ export function getOfflineAnswer(query: string): AgentAnswer {
   return {
     text: "I don't have that information in Aravind's portfolio. You can contact him directly at aravindyallao@gmail.com or via LinkedIn.",
     action: {
-      type: "email",
+      type: "contact",
       label: "Contact Aravind Directly",
-      url: `mailto:${AI_KNOWLEDGE_BASE.contact.email}?subject=Portfolio%20Contact%20-%20Aravind%20Naidu%20Yalla`,
+      url: "#contact",
     },
   };
 }

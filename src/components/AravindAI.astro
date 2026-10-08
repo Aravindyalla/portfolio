@@ -284,31 +284,105 @@
       const formattedText = formatAnswer(text);
       bubble.innerHTML = formattedText;
 
-      // Append action button if present (Resume, LinkedIn, GitHub, Email)
-      if (action && action.url && action.label) {
+      // Append action button if present (Resume, LinkedIn, GitHub, Email/Contact)
+      if (action && (action.url || action.label)) {
         const actionWrap = document.createElement('div');
         actionWrap.className = 'ai-action-btn-wrap';
 
-        const actionBtn = document.createElement('a');
-        actionBtn.href = action.url;
-        actionBtn.className = 'ai-action-pill';
-        actionBtn.target = action.url.startsWith('mailto:') ? '_self' : '_blank';
-        actionBtn.rel = 'noopener noreferrer';
+        const isContactOrEmail =
+          action.type === 'email' ||
+          action.type === 'contact' ||
+          (action.url && action.url.startsWith('mailto:')) ||
+          (action.url && action.url.startsWith('#contact'));
 
-        let iconSvg = '';
-        if (action.type === 'resume') {
-          actionBtn.setAttribute('download', 'Aravind_Naidu_Yalla_Resume.pdf');
-          iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
-        } else if (action.type === 'linkedin') {
-          iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`;
-        } else if (action.type === 'github') {
-          iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>`;
+        if (isContactOrEmail) {
+          // 1. Primary: Scroll to Contact Form on page (100% works, interactive, fills form)
+          const contactBtn = document.createElement('a');
+          contactBtn.href = '#contact';
+          contactBtn.className = 'ai-action-pill ai-action-contact';
+          contactBtn.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Go to Contact Form</span> &darr;
+          `;
+          contactBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleChat(false);
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              setTimeout(() => {
+                const nameInput = document.getElementById('contact-name') as HTMLInputElement | null;
+                nameInput?.focus();
+              }, 450);
+            }
+            if ((window as any).showToast) {
+              (window as any).showToast('Navigating to Contact Form... (Email: aravindyallao@gmail.com)');
+            }
+          });
+          actionWrap.appendChild(contactBtn);
+
+          // 2. Open Gmail (Web) directly in browser (works everywhere, zero desktop client required)
+          const gmailBtn = document.createElement('a');
+          gmailBtn.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=aravindyallao@gmail.com&su=Portfolio%20Contact%20-%20Aravind%20Naidu%20Yalla';
+          gmailBtn.target = '_blank';
+          gmailBtn.rel = 'noopener noreferrer';
+          gmailBtn.className = 'ai-action-pill ai-action-gmail';
+          gmailBtn.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span>Open in Gmail (Web)</span> &rarr;
+          `;
+          actionWrap.appendChild(gmailBtn);
+
+          // 3. Copy Email button
+          const copyBtn = document.createElement('button');
+          copyBtn.type = 'button';
+          copyBtn.className = 'ai-action-pill ai-action-copy';
+          copyBtn.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>Copy Email</span>
+          `;
+          copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText('aravindyallao@gmail.com').then(() => {
+              if ((window as any).showToast) {
+                (window as any).showToast('Email copied: aravindyallao@gmail.com');
+              }
+            });
+          });
+          actionWrap.appendChild(copyBtn);
         } else {
-          iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>`;
+          // Standard Actions: Resume, LinkedIn, GitHub, Anchors
+          const actionBtn = document.createElement('a');
+          actionBtn.href = action.url;
+          actionBtn.className = 'ai-action-pill';
+          const isAnchor = action.url && action.url.startsWith('#');
+          actionBtn.target = isAnchor ? '_self' : '_blank';
+          actionBtn.rel = 'noopener noreferrer';
+
+          if (isAnchor) {
+            actionBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              toggleChat(false);
+              const target = document.querySelector(action.url);
+              target?.scrollIntoView({ behavior: 'smooth' });
+            });
+          }
+
+          let iconSvg = '';
+          if (action.type === 'resume') {
+            actionBtn.setAttribute('download', 'Aravind_Naidu_Yalla_Resume.pdf');
+            iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`;
+          } else if (action.type === 'linkedin') {
+            iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`;
+          } else if (action.type === 'github') {
+            iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>`;
+          } else {
+            iconSvg = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>`;
+          }
+
+          actionBtn.innerHTML = `${iconSvg} <span>${action.label}</span> &rarr;`;
+          actionWrap.appendChild(actionBtn);
         }
 
-        actionBtn.innerHTML = `${iconSvg} <span>${action.label}</span> &rarr;`;
-        actionWrap.appendChild(actionBtn);
         bubble.appendChild(actionWrap);
       }
 
@@ -684,6 +758,10 @@
     margin-top: 10px;
     padding-top: 8px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
   }
 
   .ai-action-pill {
@@ -698,6 +776,8 @@
     font-size: 0.78rem;
     font-weight: 600;
     text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
     transition: all 0.2s ease;
   }
 
@@ -706,6 +786,39 @@
     border-color: #38bdf8;
     color: #ffffff;
     transform: translateY(-1px);
+  }
+
+  .ai-action-contact {
+    background: rgba(16, 185, 129, 0.14);
+    border-color: rgba(16, 185, 129, 0.45);
+    color: #34d399;
+  }
+  .ai-action-contact:hover {
+    background: rgba(16, 185, 129, 0.28);
+    border-color: #34d399;
+    color: #ffffff;
+  }
+
+  .ai-action-gmail {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #f87171;
+  }
+  .ai-action-gmail:hover {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: #f87171;
+    color: #ffffff;
+  }
+
+  .ai-action-copy {
+    background: rgba(148, 163, 184, 0.12);
+    border-color: rgba(148, 163, 184, 0.35);
+    color: #cbd5e1;
+  }
+  .ai-action-copy:hover {
+    background: rgba(148, 163, 184, 0.24);
+    border-color: #cbd5e1;
+    color: #ffffff;
   }
 
   /* Starter Chips */
